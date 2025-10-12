@@ -1,0 +1,92 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #cfe8ef;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+/* Main sekcija */
+.main-section {
+    display: flex;
+    align-items: flex-start; 
+    justify-content: space-between;
+    padding: 60px 80px;
+    background-color: #c6dbf0;
+    min-height: auto;
+    border-radius: 5px;
+}
+
+.main-text {
+    max-width: 50%;
+    margin-left: auto;
+}
+
+.main-text h2 {
+    font-size: 60px;
+    color: #0a324e;
+}
+
+.main-span {
+    color: #206699;
+}
+
+.main-text p {
+    margin: 15px 0;
+    font-size: 30px;
+}
+
+.btn-primary {
+    background-color: #85c7de;
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    font-size: 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: 150px;
+}
+
+.btn-primary:hover {
+    background-color: #a0c4e2;
+}
+
+.main-image{
+    height: 800px;
+    width: 800px;
+}
+
+.feature-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 kolone po redu */
+    gap: 20px;
+    margin-top: 30px;
+    margin-top: 50px;
+}
+
+.card {
+    background-color: #569dc3;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 45px;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, background-color 0.3s;  /* Ovo sluzi da bi hover tranzicija isla 0.3 sekunde, a ne da me oslepi animacija */
+    cursor: default;
+    margin-top: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    background-color: #7bb9d9;
+}
+
+.main-image img {
+    max-width: 800px;
+    height: auto;
+    border-radius: 10px;
+    margin-left: 300px;
+    margin-top: 120px;
+}

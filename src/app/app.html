@@ -1,0 +1,46 @@
+<header>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <div class="header-container">
+    <div class="logo">
+      <h1>Digitalna prodavnica igračaka za decu</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a routerLink="/">
+            <i class="fa-solid fa-house-chimney"></i>
+            Početna</a></li>
+
+        <li><a routerLink="/igracke">
+            <i class="fa-solid fa-face-smile"></i>
+            Ponuda igračaka</a></li>
+
+        <li><a routerLink="/rezervacije">
+            <i class="fa-solid fa-star"></i>
+            Rezervacije</a></li>
+
+        <li><a routerLink="/profil">
+            <i class="fa-solid fa-circle-user"></i>
+            Moj profil</a></li>
+
+        <li><a routerLink="/kontakt">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+            Kontakt</a></li>
+        <li><a routerLink="/login">
+            <i class="fa-solid fa-user-plus"></i>
+            Login</a></li>
+        <li><a routerLink="/logout">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Logout</a></li>
+        <li><a routerLink="/korpa">
+            <i class="fa-solid fa-cart-shopping"></i>
+            Korpa</a></li>
+      </ul>
+    </nav>
+    <div class="search-bar">
+      <input type="text" placeholder="Pretraži igračke..." [(ngModel)]="pretraga" />
+      <button>
+        <i class="fa fa-search"></i></button>
+    </div>
+  </div>
+</header>
+<router-outlet></router-outlet>
