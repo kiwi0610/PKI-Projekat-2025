@@ -1,0 +1,44 @@
+<div class="card login">
+    <div class="card-header">
+        <h5> Signup</h5>
+    </div>
+    <div class="card-body">
+
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Ime</label>
+                <input type="text" class="form-control" id="name" >
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Prezime</label>
+                <input type="text" class="form-control" id="name" >
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Adresa</label>
+                <input type="email" class="form-control" id="email" >
+            </div>
+             <div class="mb-3">
+                <label for="name" class="form-label">Broj Telefona</label>
+                <input type="tel" class="form-control" id="name" >
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Sifra</label>
+                <input type="password" class="form-control" id="password">
+            </div>
+            <div class="mb-3">
+                <label for="repeat" class="form-label">Ponavljanje Sifre</label>
+                <input type="password" class="form-control" id="repeat">
+            </div>
+            <div class="mb-3">
+                <label for="repeat" class="form-label">Izaberite Svoj Omiljen Tip Igracke</label>
+                <select class = "form-select">
+                    @for (t of toyTypes(); track $index) {
+                        <option [value] = "t">{{t}}</option>
+                    }
+
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-paper-plane"></i> Submit</button>
+        </form>
+    </div>
+</div>
