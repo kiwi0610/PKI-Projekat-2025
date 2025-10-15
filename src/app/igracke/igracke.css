@@ -1,0 +1,66 @@
+.cards-container {
+    font-family: "Poppins", sans-serif;
+    background-color: #cfe8ef;
+    color: #1a1a1a;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 10px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+}
+
+.card-header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.card-body p {
+    margin: 4px 0;
+}
+
+.card-img {
+    height: auto;
+    width: 300px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.button-blue,
+.button-green {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;      /* Ovo mora da ostane ovako, jer me nervira da dugmići budu podvučeni(zbog a taga) */
+    color: #fff;
+}
+
+.button-blue {
+    background-color: #007bff;
+}
+
+.button-blue:hover {
+    background-color: #0056b3;
+}
+
+.button-green {
+    background-color: #28a745;
+}
+
+.button-green:hover {
+    background-color: #1e7e34;
+}

@@ -1,24 +1,34 @@
-<p>igracke works!</p>
+<div class="cards-container">
 
-<div ngFor=""   class="feature-cards">
-
-    <div class="card">
-        <i class="fa-solid fa-truck"></i>
-        Besplatna dostava
-    </div>
+    @for (toy of toys(); track $index) {
 
     <div class="card">
-        <i class="fa-solid fa-user-shield"></i>
-        Sigurna kupovina
+
+        <img [src]="'https://toy.pequla.com' + toy.imageUrl" alt="{{ toy.name }}" class="card-img">
+
+        <div class="card-header">
+            {{ toy.name }}
+        </div>
+
+        <div class="card-body">
+            <p><strong>Tip:</strong> {{ toy.type.name }}</p>
+            <p><strong>Opis:</strong> {{ toy.description }}</p>
+            <p><strong>Cena:</strong> {{ toy.price }} RSD</p>
+        </div>
+
+        <div class="card-footer">
+            <div class="button-group">
+                <a [routerLink]="`/detalji/${toy.toyId}`" class="button-blue">
+                    <i class="fa-solid fa-circle-info"></i>Detalji
+                </a>
+
+                <a [routerLink]="`/detalji/${toy.toyId}/rezervacija`" class="button-green">
+                    <i class="fa-solid fa-cart-shopping"></i>Dodaj u korpu
+                </a>
+            </div>
+        </div>
+
     </div>
 
-    <div class="card">
-        <i class="fa-solid fa-trophy"></i>
-        Najbolji brendovi igračaka
-    </div>
-
-    <div class="card">
-        <i class="fa-solid fa-universal-access"></i>
-        Personalizovane preporuke
-    </div>
+    }
 </div>

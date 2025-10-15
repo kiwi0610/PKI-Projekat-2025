@@ -1,0 +1,36 @@
+<body>
+
+    @if(toy()) {
+    <div class="cards-container">
+
+        <div class="card" style="flex-direction: row; max-width: 700px;">
+
+            <div class="card-img"
+                style="flex: 1; display: flex; justify-content: center; align-items: center; padding: 10px;">
+                <img [src]="'https://toy.pequla.com' + toy()?.imageUrl" alt="{{toy()?.name}}">
+            </div>
+
+            <div class="card-body" style="flex: 2; padding-left: 20px;">
+                <div class="card-header">
+                    <h5>{{toy()?.name}}</h5>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>toyId:</strong> {{toy()?.toyId}}</li>
+                    <li class="list-group-item"><strong>Permalink:</strong> {{toy()?.permalink}}</li>
+                    <li class="list-group-item"><strong>Opis:</strong> {{toy()?.description}}</li>
+                    <li class="list-group-item"><strong>Tip:</strong> {{toy()?.type?.name}}</li>
+                    <li class="list-group-item"><strong>Tip opis:</strong> {{toy()?.type?.description}}</li>
+                    <li class="list-group-item"><strong>Grupa uzrasta:</strong> {{toy()?.ageGroup?.name}}</li>
+                    <li class="list-group-item"><strong>Grupa uzrasta opis:</strong> {{toy()?.ageGroup?.description}}
+                    </li>
+                    <li class="list-group-item"><strong>Target group:</strong> {{toy()?.targetGroup}}</li>
+                    <li class="list-group-item"><strong>Datum proizvodnje:</strong> {{toy()?.productionDate}}</li>
+                    <li class="list-group-item"><strong>Cena:</strong> {{toy()?.price}} RSD</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    }
+
+</body>

@@ -1,0 +1,67 @@
+/* Pozadina cele stranice do dna */
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #cfe8ef; /* svetlo plava */
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Container za kartice */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Kartica */
+.card {
+    display: flex;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background-color: #cfe8ef;
+    gap: 20px;
+    max-width: 700px;
+    margin-top: 8%;
+    margin-bottom: auto;
+}
+
+/* Slika */
+.card-img img {
+    max-width: 350px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+/* Podaci */
+.card-body {
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-header {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.list-group {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-group-item {
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}

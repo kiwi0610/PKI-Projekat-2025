@@ -2,7 +2,7 @@ import { UserModel } from "../models/user.model"
 
 export class UserService {
 
-    static getUsers(): UserModel[]{
+    static getUsers(): UserModel[] {
         if (!localStorage.getItem('users'))
             localStorage.setItem('users', JSON.stringify([
                 {
@@ -13,13 +13,13 @@ export class UserService {
                     password: 'user123',
                     toyTypes: 'plisana igracka',
                     data: []
-                }   
+                }
             ]))
-                return JSON.parse(localStorage.getItem('users')!)
+        return JSON.parse(localStorage.getItem('users')!)
     }
 
     static findUserByEmail(email: string) {
-       
+
         const users: UserModel[] = this.getUsers()
         const exactUser = users.find(u => u.email === email)
 
@@ -30,20 +30,19 @@ export class UserService {
 
     static login(email: string, password: string) {
         const user = this.findUserByEmail(email)
-       
+
         if (user.password !== password) {
             throw new Error('Loša loznika ili email!')
-            
+
         }
 
         localStorage.setItem('active', user.email)
     }
 
-    static signup(payload: UserModel)
-    {
-    const users: UserModel[] = this.getUsers()
-    users.push(payload)
-    localStorage.setItem('users', JSON.stringify(users))
+    static signup(payload: UserModel) {
+        const users: UserModel[] = this.getUsers()
+        users.push(payload)
+        localStorage.setItem('users', JSON.stringify(users))
     }
 
     static getActiveUser() {
@@ -54,8 +53,7 @@ export class UserService {
         return this.findUserByEmail(active)
     }
 
-    static logout()
-    {
+    static logout() {
         localStorage.removeItem('active')
     }
 }
