@@ -7,13 +7,16 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="mb-3">
                 <label for="email" class="form-label">Email Adresa</label>
-                <input type="email" class="form-control" id="email" formControlName ="email" >
+                <input type="email" class="form-control" id="email" formControlName="email">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Sifra</label>
-                <input type="password" class="form-control" id="password" formControlName = "password">
+                <input type="password" class="form-control" id="password" formControlName="password">
             </div>
-            <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-paper-plane"></i> Submit</button>
+            <div>
+                <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-paper-plane"></i> Submit</button>
+                <a routerLink="/signup" class="btn btn-link"> Nemam napravljen profil </a>
+            </div>
         </form>
     </div>
 </div>

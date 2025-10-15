@@ -18,22 +18,31 @@
             <i class="fa-solid fa-star"></i>
             Rezervacije</a></li>
 
+        <li><a routerLink="/kontakt">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+            Kontakt</a></li>
+
+             <li><a routerLink="/signup">
+            <i class="fa-solid fa-user-plus"></i>
+            Signup</a></li>
+
+        @if(hasAuth()){
         <li><a routerLink="/profil">
             <i class="fa-solid fa-circle-user"></i>
             Moj profil</a></li>
 
-        <li><a routerLink="/kontakt">
-            <i class="fa-solid fa-mobile-screen-button"></i>
-            Kontakt</a></li>
+        <li><a routerLink="/logout">
+            <button type="button" class="nav-link"(click)="logoutNow()">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Logout</button></a></li>
+        } @else {
         <li><a routerLink="/login">
             <i class="fa-solid fa-user-plus"></i>
             Login</a></li>
-        <li><a routerLink="/signup">
-            <i class="fa-solid fa-user-plus"></i>
-            signup</a></li>
-        <li><a routerLink="/logout">
-            <i class="fa-solid fa-right-to-bracket"></i>
-            Logout</a></li>
+       
+        }
+
+
         <li><a routerLink="/korpa">
             <i class="fa-solid fa-cart-shopping"></i>
             Korpa</a></li>

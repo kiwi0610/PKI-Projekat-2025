@@ -4,41 +4,44 @@
     </div>
     <div class="card-body">
 
-        <form>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="mb-3">
                 <label for="name" class="form-label">Ime</label>
-                <input type="text" class="form-control" id="name" >
+                <input type="text" class="form-control" id="name" formControlName = "firstName">
             </div>
             <div class="mb-3">
-                <label for="name" class="form-label">Prezime</label>
-                <input type="text" class="form-control" id="name" >
+                <label for="surname" class="form-label">Prezime</label>
+                <input type="text" class="form-control" id="surname" formControlName = "lastName" >
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email Adresa</label>
-                <input type="email" class="form-control" id="email" >
+                <input type="email" class="form-control" id="email"formControlName = "email" >
             </div>
              <div class="mb-3">
-                <label for="name" class="form-label">Broj Telefona</label>
-                <input type="tel" class="form-control" id="name" >
+                <label for="phone" class="form-label">Broj Telefona</label>
+                <input type="tel" class="form-control" id="phone" formControlName = "phone">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Sifra</label>
-                <input type="password" class="form-control" id="password">
+                <input type="password" class="form-control" id="password" formControlName = "password">
             </div>
             <div class="mb-3">
                 <label for="repeat" class="form-label">Ponavljanje Sifre</label>
-                <input type="password" class="form-control" id="repeat">
+                <input type="password" class="form-control" id="repeat" formControlName = "repeat">
             </div>
             <div class="mb-3">
-                <label for="repeat" class="form-label">Izaberite Svoj Omiljen Tip Igracke</label>
-                <select class = "form-select">
+                <label for="toyType" class="form-label" >Izaberite Svoj Omiljen Tip Igracke</label>
+                <select class = "form-select" id = "toyType" formControlName = "toyType">
                     @for (t of toyTypes(); track $index) {
                         <option [value] = "t">{{t}}</option>
                     }
 
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-paper-plane"></i> Submit</button>
+            <div>
+                <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-paper-plane"></i> Submit</button>
+                <a routerLink="/login" class="btn btn-link"> Već imam napravljen profil </a>
+            </div>
         </form>
     </div>
 </div>
