@@ -1,5 +1,5 @@
 <div class="search-bar">
-    <input type="text" placeholder="Pretraži igračke..." [(ngModel)]="pretraga" />
+    <input type="text" placeholder="Pretraži igračke..." [(ngModel)]="pretraga" (input)="filterToys()" />
     <button>
         <i class="fa fa-search"></i>
     </button>
@@ -7,7 +7,7 @@
 
 <div class="cards-container">
 
-    @for (toy of toys(); track $index) {
+    @for (toy of filteredToys(); track $index) {
 
     <div class="card">
 

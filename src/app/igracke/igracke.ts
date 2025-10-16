@@ -14,26 +14,24 @@ import { FormsModule } from '@angular/forms';
 export class Igracke implements OnInit {
 
   protected toys = signal<ToyModel[]>([]);
+  protected filteredToys = signal<ToyModel[]>([]);
+  protected pretraga: string = '';
 
   ngOnInit() {
     ToysService.getToys()
       .then(rsp => {
         console.log('Igračke:', rsp.data);
         this.toys.set(rsp.data);
-        this.filteredToys.set(rsp.data)
+        this.filteredToys.set(rsp.data);
       })
       .catch(err => console.error('Greška pri učitavanju igračaka:', err));
   }
 
-  pretraga: string = '';
-
-  protected search: string = ''; // vezano za input
-  protected filteredToys = signal<ToyModel[]>([]); // ovo će prikazivati filtrirane igračke
-
   filterToys() {
-    const slovo = this.search.toLowerCase(); // mala slova da pretraga bude case-insensitive
+    const slovo = this.pretraga.toLowerCase();
+
     if (!slovo) {
-      this.filteredToys.set(this.toys()); // ako je prazno, prikazi sve
+      this.filteredToys.set(this.toys());
       return;
     }
 
@@ -45,7 +43,4 @@ export class Igracke implements OnInit {
 
     this.filteredToys.set(filtered);
   }
-
-
-
 }

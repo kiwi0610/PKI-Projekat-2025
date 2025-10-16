@@ -11,7 +11,7 @@ import { ToysService } from '../services/toys.service';
 })
 export class Details {
   protected toy = signal<ToyModel | null>(null)
-
+  
   constructor(private route: ActivatedRoute) {
   this.route.params.subscribe((params: any) => {
   console.log('PARAMS:', params); // ovo će sada biti {id: 5} npr.

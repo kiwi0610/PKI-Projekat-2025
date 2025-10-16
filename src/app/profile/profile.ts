@@ -3,6 +3,7 @@ import { UserModel } from '../models/user.model';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-profile',
   imports: [],
@@ -21,4 +22,6 @@ export class Profile {
         this.router.navigate([`/login`])
     }
   }
+
+   
 }

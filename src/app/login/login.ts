@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { UserService } from '../services/user.service';
 import { Router, RouterLink } from '@angular/router';
 
@@ -11,30 +11,28 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './login.css'
 })
 export class Login {
-  protected form : FormGroup
+  protected form: FormGroup
 
-  constructor(private formBuilder : FormBuilder, protected router : Router) 
-  {
-    this.form =  this.formBuilder.group(
+  constructor(private formBuilder: FormBuilder, protected router: Router) {
+    this.form = this.formBuilder.group(
       {
-        email: ['',[Validators.required,Validators.email]],
-        password: ['',[Validators.required]]
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required]]
       })
   }
-  onSubmit()
-  {
-    if(!this.form.valid)
-      {
-        alert('Forma nije ispravna!')
-        return
-      }
-      try{
+  onSubmit() {
+    if (!this.form.valid) {
+      alert('Forma nije ispravna!')
+      return
+    }
+    try {
       UserService.login(this.form.value.email, this.form.value.password)
-      this.router.navigate(['/profile'])
+      const url = sessionStorage.getItem(`ref`) ?? `profile`
+      sessionStorage.removeItem(`ref`)
+      this.router.navigateByUrl(url)
 
-     } catch (e)
-     {
+    } catch (e) {
       alert('Proverite Vaše parametre za prijavljivanje!')
-     }
+    }
   }
 }

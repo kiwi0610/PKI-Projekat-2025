@@ -1,3 +1,5 @@
+import { cartModel } from "./cart.model";
+
 export interface UserModel {
     firstName: string,
     lastName: string
@@ -9,5 +11,5 @@ export interface UserModel {
         name: string;
         description: string;
     };
-    data: any[]
+    data: cartModel[]
 }
