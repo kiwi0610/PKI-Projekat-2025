@@ -1,0 +1,95 @@
+.body{
+    font-family: "Poppins", sans-serif;
+    background-color: #cfe8ef; /* svetlo plava */
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Kartica */
+.card {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 6%;
+    /* gornji deo + dugme ispod */
+    background-color: #cfe8ef;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border: 2px solid #c1cdf7;
+    border-radius: 12px;
+    padding: 20px;
+    width: 700px;
+    gap: 16px;
+    color: #386fa4;
+}
+
+/* Gornji deo kartice: slika + tekst */
+.card-top {
+    display: flex;
+    flex-direction: row;
+    /* slika levo, tekst desno */
+    gap: 20px;
+    align-items: flex-start;
+    /* tekst počinje na vrhu slike */
+}
+
+/* Slika */
+.card-img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-img img {
+    max-width: 280px;
+    border-radius: 8px;
+}
+
+/* Tekst desno */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 2;
+}
+
+/* Dugme + količina */
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* centrirano horizontalno */
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.quantity-control {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-qty {
+    background-color: #386fa4;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.btn-add-to-cart {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.price-total {
+    font-weight: bold;
+    margin-top: 5px;
+}

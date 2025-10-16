@@ -45,6 +45,7 @@ body {
     cursor: pointer;
     transition: 0.3s;
     margin-left: 150px;
+    text-decoration: none;
 }
 
 .btn-primary:hover {

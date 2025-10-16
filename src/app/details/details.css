@@ -18,7 +18,7 @@ body {
 /* Kartica */
 .card {
     display: flex;
-    border: 2px solid #ddd;
+    border: 2px solid #c1cdf7;
     border-radius: 12px;
     padding: 16px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
@@ -39,7 +39,7 @@ body {
 
 /* Podaci */
 .card-body {
-    color: #1a1a1a;
+    color: #386fa4;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -59,7 +59,7 @@ body {
 
 .list-group-item {
     padding: 6px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #c1cdf7;
 }
 
 .list-group-item:last-child {

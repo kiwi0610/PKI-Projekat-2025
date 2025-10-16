@@ -1,3 +1,10 @@
+<div class="search-bar">
+    <input type="text" placeholder="Pretraži igračke..." [(ngModel)]="pretraga" />
+    <button>
+        <i class="fa fa-search"></i>
+    </button>
+</div>
+
 <div class="cards-container">
 
     @for (toy of toys(); track $index) {

@@ -64,3 +64,35 @@
 .button-green:hover {
     background-color: #1e7e34;
 }
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    background-color: #cfe8ef;
+    gap: 5px;
+    
+}
+
+.search-bar input {
+    padding: 20px;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    width: 700px;
+}
+
+.search-bar button {
+    background-color: #569dc3;
+    border: none;
+    color: white;
+    padding: 17px;
+    border-radius: 15px;
+    margin-top: 55px;
+    margin-bottom: 3%;
+    cursor: pointer;
+    width: 50px;
+}

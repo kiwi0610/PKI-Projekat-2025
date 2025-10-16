@@ -1,19 +1,19 @@
-<div class="card login">
+<div class="cards-container">
     <div class="card-header">
-        <h5> Login</h5>
+        <h5> Login </h5>
     </div>
     <div class="card-body">
 
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="mb-3">
+            <div class="card">
                 <label for="email" class="form-label">Email Adresa</label>
                 <input type="email" class="form-control" id="email" formControlName="email">
             </div>
-            <div class="mb-3">
+            <div class="card">
                 <label for="password" class="form-label">Sifra</label>
                 <input type="password" class="form-control" id="password" formControlName="password">
             </div>
-            <div>
+            <div class="card">
                 <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-paper-plane"></i> Submit</button>
                 <a routerLink="/signup" class="btn btn-link"> Nemam napravljen profil </a>
             </div>

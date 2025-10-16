@@ -1,0 +1,90 @@
+/* Glavni kontejner */
+.cards-container {
+    display: flex;
+    flex-direction: column;       /* da bi naslov bio iznad forme */
+    align-items: center;          /* centriranje horizontalno */
+    min-height: 100vh;
+    background-color: #cfe8ef;
+}
+
+/* Naslov Signup */
+.card-header h5 {
+    text-align: center;
+    font-size: 28px;
+    color: #386fa4;
+    font-weight: 800px;
+}
+
+/* Forma */
+.card-body {
+    background-color: #ffffff;
+    padding: 32px;
+    border-radius: 16px;
+    width: 400px;
+}
+
+/* Pojedinačna polja */
+.card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+/* Labela iznad inputa */
+.form-label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #386fa4;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* Inputi i select */
+.form-control,
+.form-select {
+    padding: 10px;
+    border: 1px solid #386fa4;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0px 0px 4px rgba(0, 123, 255, 0.4);
+    outline: none;
+}
+
+/* Dugme Submit */
+.btn-primary {
+    width: 100%;
+    background-color: #007bff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Link ka login stranici */
+.btn-link {
+    display: block;
+    text-align: center;
+    margin-top: 8px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}

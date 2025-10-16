@@ -1,1 +1,44 @@
-<p>rezervisi works!</p>
+<div class="body">
+    <div class="card">
+        <!-- Gornji deo: slika + tekst -->
+        <div class="card-top">
+            <div class="card-img">
+                <img [src]="'https://toy.pequla.com' + toy()?.imageUrl" alt="{{toy()?.name}}">
+            </div>
+
+            <div class="card-body">
+                <div class="card-header">
+                    <h2>{{toy()?.name}}</h2>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>toyId:</strong> {{toy()?.toyId}}</li>
+                    <li class="list-group-item"><strong>Opis:</strong> {{toy()?.description}}</li>
+                    <li class="list-group-item"><strong>Tip:</strong> {{toy()?.type?.name}}</li>
+                    <li class="list-group-item"><strong>Tip opis:</strong> {{toy()?.type?.description}}</li>
+                    <li class="list-group-item"><strong>Grupa uzrasta:</strong> {{toy()?.ageGroup?.name}}</li>
+                    <li class="list-group-item"><strong>Grupa uzrasta opis:</strong> {{toy()?.ageGroup?.description}}
+                    </li>
+                    <li class="list-group-item"><strong>Datum proizvodnje:</strong> {{toy()?.productionDate}}</li>
+                    <li class="list-group-item"><strong>Cena:</strong> {{toy()?.price}} RSD</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Dugme + količina ispod -->
+        <div class="card-footer">
+            <div class="quantity-control">
+                <button type="button" class="btn-qty" (click)="decreaseStart()">−</button>
+                <span class="quantity">{{ start }}</span>
+                <button type="button" class="btn-qty" (click)="increaseStart()">+</button>
+            </div>
+
+            <button class="btn-add-to-cart" (click)="addToCart(toy)">
+                <i class="fa-solid fa-cart-shopping"></i> Dodaj u korpu
+            </button>
+
+            <p class="price-total">
+                Ukupno: <strong>{{ (toy()?.price ?? 0) * start }} RSD</strong>
+            </p>
+        </div>
+    </div>
+</div>

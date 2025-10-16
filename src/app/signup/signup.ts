@@ -42,10 +42,10 @@ export class Signup {
     }
 
     try {
-      const formValue : any =this.form.value
+      const formValue: any = this.form.value
       delete formValue.repeat
       UserService.signup(formValue)
-     this.router.navigateByUrl('/login')
+      this.router.navigateByUrl('/login')
     } catch (e) {
       console.error(e)
       alert('Popunite sva prazna polja!')
