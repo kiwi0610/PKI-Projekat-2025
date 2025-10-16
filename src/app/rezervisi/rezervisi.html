@@ -1,6 +1,6 @@
 <div class="body">
     <div class="card">
-        <!-- Gornji deo: slika + tekst -->
+
         <div class="card-top">
             <div class="card-img">
                 <img [src]="'https://toy.pequla.com' + toy()?.imageUrl" alt="{{toy()?.name}}">
@@ -24,7 +24,6 @@
             </div>
         </div>
 
-        <!-- Dugme + količina ispod -->
         <div class="card-footer">
             <div class="quantity-control">
                 <button type="button" class="btn-qty" (click)="decreaseStart()">−</button>
