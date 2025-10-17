@@ -56,6 +56,13 @@ export class Cart {
     this.saveCart(items);
   }
 
+  cancelItem(index: number) {
+  const items = this.cartItems();
+  items[index].status = 'cancelled';
+  this.cartItems.set([...items]);
+}
+
+
   payItem(index: number) {
     const items = [...this.cartItems()];
     const item = items[index];

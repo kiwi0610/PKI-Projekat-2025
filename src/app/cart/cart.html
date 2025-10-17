@@ -15,29 +15,32 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of cartItems(); let i = index">
-                <td>{{ i + 1 }}</td>
-                <td>{{ item.toyName }}</td>
-                <td>{{ item.amount }}</td>
-                <td [ngClass]="getStatusClass(item.status)">{{ item.status }}</td>
-                <td>{{ getItemPrice(item) | number:'1.2-2' }} RSD</td>
-                <td>{{ item.createdAt | date:'dd.MM.yyyy. HH:mm' }}</td>
-                <td>
-                    <button class="btn-remove" (click)="removeItem(i)">🗑️ Ukloni</button>
-                    <button class="btn-pay" (click)="payItem(i)">💳 Plati</button>
-                </td>
-                <td>
-                    <ng-container *ngIf="item.status === 'paid'; else emptyRating">
-                        <span *ngFor="let star of [1,2,3,4,5]" (click)="rateItem(i, star)"
-                            [ngStyle]="{'color': (item.ratingValue && star <= item.ratingValue) ? 'gold' : 'gray', 'cursor': 'pointer'}">
-                            ★
-                        </span>
-                    </ng-container>
-                    <ng-template #emptyRating>
-                        -
-                    </ng-template>
-                </td>
-            </tr>
+            @for (item of cartItems(); track i; let i = $index) {
+                <tr>
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ item.toyName }}</td>
+                    <td>{{ item.amount }}</td>
+                    <td [ngClass]="getStatusClass(item.status)">{{ item.status }}</td>
+                    <td>{{ getItemPrice(item) | number:'1.2-2' }} RSD</td>
+                    <td>{{ item.createdAt | date:'dd.MM.yyyy. HH:mm' }}</td>
+                    <td>
+                        <button class="btn-remove" (click)="removeItem(i)">🗑️ Ukloni</button>
+                        <button class="btn-pay" (click)="payItem(i)">💳 Plati</button>
+                    </td>
+                    <td>
+                        @if (item.status === 'paid') {
+                            @for (star of [1,2,3,4,5]; track star) {
+                                <span (click)="rateItem(i, star)"
+                                    [ngStyle]="{'color': (item.ratingValue && star <= item.ratingValue) ? 'gold' : 'gray', 'cursor': 'pointer'}">
+                                    ★
+                                </span>
+                            }
+                        } @else {
+                            -
+                        }
+                    </td>
+                </tr>
+            }
         </tbody>
         <tfoot>
             <tr>

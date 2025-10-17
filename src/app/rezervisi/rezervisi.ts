@@ -1,22 +1,23 @@
 import { Component, signal } from '@angular/core';
-import { ToyModel } from '../models/toy.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToysService } from '../services/toys.service';
 import { UserService } from '../services/user.service';
+import { ToyModel } from '../models/toy.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-rezervisi',
-  imports: [],
   templateUrl: './rezervisi.html',
   styleUrls: ['./rezervisi.css']
 })
 export class Rezervisi {
 
   protected toy = signal<ToyModel | null>(null);
-  start: number = 1; // količina
+  start: number = 1; 
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe((params: any) => {
+      
       if (!localStorage.getItem('active')) {
         sessionStorage.setItem('ref', `/details/${params.id}/book`);
         router.navigateByUrl('/login');
@@ -51,7 +52,6 @@ export class Rezervisi {
     }
 
     try {
-      // Samo ovo dodaje u cart
       UserService.addToCart(
         toyValue.toyId,
         toyValue.name,
@@ -60,13 +60,23 @@ export class Rezervisi {
         'waiting'
       );
 
-      alert(`${toyValue.name} (${this.start} kom) dodat u korpu!`);
-      this.router.navigateByUrl('/korpa');
+      Swal.fire({
+        title: `${toyValue.name} (${this.start} kom) dodat u korpu!`,
+        text: 'Šta želite da uradite dalje?',
+        icon: 'success',
+        showCancelButton: true,
+        confirmButtonText: 'Idi u korpu',
+        cancelButtonText: 'Nastavi kupovinu',
+        allowOutsideClick: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl('/korpa');
+        }
+      });
+
     } catch (error: any) {
       console.error(error);
       alert('Greška prilikom dodavanja u korpu: ' + error.message);
     }
   }
-
-
 }

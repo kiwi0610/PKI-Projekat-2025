@@ -27,9 +27,13 @@ export class Login {
     }
     try {
       UserService.login(this.form.value.email, this.form.value.password)
-      const url = sessionStorage.getItem(`ref`) ?? `profile`
+      const url = sessionStorage.getItem(`ref`) ?? `/profile`
       sessionStorage.removeItem(`ref`)
-      this.router.navigateByUrl(url)
+      
+      this.router.navigateByUrl(`/`).then(() =>
+        {
+          this.router.navigateByUrl(url)
+        })
 
     } catch (e) {
       alert('Proverite Vaše parametre za prijavljivanje!')

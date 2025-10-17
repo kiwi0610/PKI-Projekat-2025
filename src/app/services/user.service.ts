@@ -64,7 +64,7 @@ export class UserService {
                     toyId,
                     toyName,
                     amount,
-                    price,        // ⚡ ovde mora biti broj
+                    price,       
                     status,
                     createdAt: new Date(),
                     updatedAt: null
@@ -94,13 +94,12 @@ export class UserService {
 
 
 
-    // ✅ Vrati sve igračke iz korisnikovog "cart"-a
+
     static getCartItems() {
         const activeUser = this.getActiveUser()
         return activeUser.data
     }
 
-    // ✅ Odjava korisnika
     static logout() {
         localStorage.removeItem('active')
     }
