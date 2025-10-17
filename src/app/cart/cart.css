@@ -1,0 +1,123 @@
+/* Celokupna pozadina stranice */
+.cart-container {
+    background-color: #e0f2ff;
+    /* svetlo plava */
+    padding: 20px;
+    min-height: 100vh;
+    /* da pokrije celu visinu */
+    font-family: Arial, sans-serif;
+}
+
+/* Naslov */
+.cart-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Tabela */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f7fbfc;
+    /* svetlo siva/plava nijansa za tabelu */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Zaglavlje tabele */
+.cart-table th {
+    background-color: #cfe3f2;
+    /* diskretna plava */
+    color: #333;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Ćelije tabele */
+.cart-table td {
+    padding: 10px;
+    border-bottom: 1px solid #d6e3ed;
+}
+
+/* Akcije dugmad */
+.btn-remove,
+.btn-pay {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-remove {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.btn-remove:hover {
+    background-color: #ff4b4b;
+}
+
+.btn-pay {
+    background-color: #4caf50;
+    color: white;
+}
+
+.btn-pay:hover {
+    background-color: #45a049;
+}
+
+/* Dugmad u footeru */
+.btn-remove-all,
+.btn-pay-all {
+    padding: 7px 15px;
+    border-radius: 4px;
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.btn-remove-all {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.btn-pay-all {
+    background-color: #4caf50;
+    color: white;
+}
+
+/* Status klase */
+.status-waiting {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+.status-paid {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.status-canceled {
+    color: #f44336;
+    font-weight: bold;
+}
+
+.status-liked {
+    color: #2196f3;
+}
+
+.status-disliked {
+    color: #f44336;
+}
+
+/* Zvezdice */
+span {
+    font-size: 18px;
+}
+
+/* Footer tabele */
+tfoot td {
+    font-weight: bold;
+    padding-top: 15px;
+}

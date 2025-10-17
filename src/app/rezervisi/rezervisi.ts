@@ -1,116 +1,72 @@
 import { Component, signal } from '@angular/core';
 import { ToyModel } from '../models/toy.model';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToysService } from '../services/toys.service';
 import { UserService } from '../services/user.service';
-import { cartModel } from '../models/cart.model';
-
 
 @Component({
   selector: 'app-rezervisi',
   imports: [],
   templateUrl: './rezervisi.html',
-  styleUrl: './rezervisi.css'
+  styleUrls: ['./rezervisi.css']
 })
 export class Rezervisi {
 
-  protected toy = signal<ToyModel | null>(null)
+  protected toy = signal<ToyModel | null>(null);
+  start: number = 1; // količina
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe((params: any) => {
       if (!localStorage.getItem('active')) {
-        sessionStorage.setItem('ref', `/details/${params.id}/book`)
-        router.navigateByUrl('/login')
-        return
+        sessionStorage.setItem('ref', `/details/${params.id}/book`);
+        router.navigateByUrl('/login');
+        return;
       }
 
-      // console.log('PARAMS:', params); // ovo će sada biti {id: 5} npr.
-      ToysService.getToysById(params.id)  // <-- koristimo "id", ne "toyId"
+      ToysService.getToysById(params.id)
         .then(rsp => this.toy.set(rsp.data))
         .catch(err => console.error(err));
     });
   }
-
-
-  convertToString() {
-    return JSON.stringify(this.toy(), null, 2)
-  }
-
-  protected formatDate(iso: string) {
-    return new Date(iso).toLocaleString('sr-RS', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    })
-  }
-
-  start: number = 1;
 
   increaseStart() {
     this.start++;
   }
 
   decreaseStart() {
-    if (this.start > 1) {
-      this.start--;
+    if (this.start > 1) this.start--;
+  }
+
+  onSubmit() {
+    const toyValue = this.toy();
+
+    if (!toyValue) {
+      alert('Igračka nije učitana!');
+      return;
+    }
+
+    if (!localStorage.getItem('active')) {
+      alert('Morate biti ulogovani da biste dodali u korpu!');
+      return;
+    }
+
+    try {
+      // Samo ovo dodaje u cart
+      UserService.addToCart(
+        toyValue.toyId,
+        toyValue.name,
+        this.start,
+        Number(toyValue.price),
+        'waiting'
+      );
+
+      alert(`${toyValue.name} (${this.start} kom) dodat u korpu!`);
+      this.router.navigateByUrl('/korpa');
+    } catch (error: any) {
+      console.error(error);
+      alert('Greška prilikom dodavanja u korpu: ' + error.message);
     }
   }
 
-  // Ako u korpi već postoji item, samo povećaj količinu, nemoj da kopiraš dva puta
-
-  addToCart(toy: any) {
-    const kolicina = toy.kolicina || 1;
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-
-    const postoji = cart.find((item: any) => item.toyId === toy.toyId);
-
-    if (postoji) {
-      postoji.quantity += kolicina;
-    } else {
-      cart.push({
-        toyId: toy.toyId,
-        name: toy.name,
-        price: toy.price,
-        imageUrl: toy.imageUrl,
-        quantity: kolicina
-      });
-    }
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${toy.name} (${kolicina} kom) dodat u korpu!`);
-  }
-
-   onSubmit() {
-  const toyValue = this.toy(); // ⚠️ pravi objekat, ne getter
-
-  if (!toyValue) {
-    alert('Igračka nije učitana!');
-    return;
-  }
-
-  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-
-  const existingItem = cart.find((item: any) => item.toyId === toyValue.toyId);
-
-  if (existingItem) {
-    existingItem.amount += this.start;
-  } else {
-    const cartItem = {
-      toyId: toyValue.toyId,
-      toyName: toyValue.name,
-      amount: this.start,
-      status: 'waiting'
-    };
-    cart.push(cartItem);
-  }
-
-  localStorage.setItem('cart', JSON.stringify(cart));
-  alert(`${toyValue.name} (${this.start} kom) dodat u korpu!`);
-}
 
 }
-
-
-
