@@ -5,64 +5,73 @@ body {
     margin: 0;
 }
 
+/* Razmak na vrhu */
+.divljak {
+    background-color: #c6dbf0;
+    height: 30px;
+}
+
+/* Pokretni tekst */
+.pokretni {
+    position: relative;
+    width: auto;
+    overflow: hidden;
+    padding: 10px 0;
+    margin: 0;
+    background: #85c7de;
+    border-top: 3px solid #85c7de;
+    border-bottom: 3px solid #85c7de;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.pokretni-tekst {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #e8f6ff;
+    animation: scrollLeft 20s linear infinite;
+}
+
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
 /* Main sekcija */
 .main-section {
     display: flex;
-    align-items: flex-start; 
     justify-content: space-between;
+    align-items: flex-start;
     padding: 60px 80px;
     background-color: #c6dbf0;
-    min-height: auto;
+    min-height: 100vh;
     border-radius: 5px;
+    gap: 0px;
 }
 
+/* Leva kolona */
 .main-text {
+    flex: 1;
     max-width: 50%;
-    margin-left: auto;
 }
 
-.main-text h2 {
-    font-size: 60px;
-    color: #0a324e;
-}
-
-.main-span {
-    color: #206699;
-}
-
-.main-text p {
-    margin: 15px 0;
-    font-size: 30px;
-}
-
-.btn-primary {
-    background-color: #85c7de;
-    border: none;
-    color: white;
-    padding: 12px 25px;
-    font-size: 24px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-    margin-left: 150px;
-    text-decoration: none;
-}
-
-.btn-primary:hover {
-    background-color: #a0c4e2;
-}
-
-.main-image{
-    height: 800px;
-    width: 800px;
-}
-
+/* Kartice */
 .feature-cards {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 kolone po redu */
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    margin-top: 30px;
     margin-top: 50px;
+}
+
+h1 {
+    font-size: 40px;
+    color: white;
 }
 
 .card {
@@ -74,9 +83,8 @@ body {
     font-size: 45px;
     border-radius: 50px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, background-color 0.3s;  /* Ovo sluzi da bi hover tranzicija isla 0.3 sekunde, a ne da me oslepi animacija */
     cursor: default;
-    margin-top: 20px;
+    transition: transform 0.3s, background-color 0.3s;
 }
 
 .card:hover {
@@ -84,10 +92,17 @@ body {
     background-color: #7bb9d9;
 }
 
+/* Desna kolona: slika */
+.main-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .main-image img {
-    max-width: 800px;
+    max-width: 100%;
     height: auto;
     border-radius: 10px;
-    margin-left: 300px;
-    margin-top: 120px;
+    margin-right: 70px;
+    margin-top: 20px;
 }

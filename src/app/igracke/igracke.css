@@ -1,6 +1,6 @@
 .cards-container {
     font-family: "Poppins", sans-serif;
-    background-color: #cfe8ef;
+    background-color: #c6dbf0;
     color: #1a1a1a;
     display: flex;
     flex-wrap: wrap;
@@ -72,9 +72,7 @@
     margin-right: auto;
     margin-left: auto;
     text-align: center;
-    background-color: #cfe8ef;
-    gap: 5px;
-    
+    background-color: #c6dbf0;
 }
 
 .search-bar input {
@@ -85,14 +83,13 @@
     width: 700px;
 }
 
-.search-bar button {
-    background-color: #569dc3;
-    border: none;
-    color: white;
-    padding: 17px;
-    border-radius: 15px;
-    margin-top: 55px;
-    margin-bottom: 3%;
-    cursor: pointer;
-    width: 50px;
+/* Razmak na vrhu */
+.divljak {
+    background-color: #c6dbf0;
+    height: 30px;
+}
+
+.divljak1 {
+    background-color: #c6dbf0;
+    height: 20px;
 }

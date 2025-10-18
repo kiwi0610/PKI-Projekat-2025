@@ -10,5 +10,5 @@ import { RouterLink } from "@angular/router";
   styleUrls: ['./pocetna.css']
 })
 export class Pocetna {
-  pretraga: string = ''; 
+
 }
