@@ -33,12 +33,21 @@ export class Profile implements OnInit, OnDestroy {
   }
 
   private loadUser() {
-    try {
-      const user = UserService.getActiveUser();
-      this.currentUser.set(user);
-    } catch {
-      // Ako nema aktivnog korisnika → preusmeri na login
+    const active = localStorage.getItem('active');
+
+    if (!active) {
       this.router.navigate(['/login']);
+      return;
     }
+
+    const users = UserService.getUsers();
+    const found = users.find(u => u.email === active);
+
+    if (!found) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    this.currentUser.set(found);
   }
 }

@@ -36,7 +36,9 @@ export class UserService {
             throw new Error('Loša lozinka ili email!')
         }
 
+        // Sigurno postavljanje aktivnog korisnika
         localStorage.setItem('active', user.email)
+        localStorage.setItem('lastLoginTime', new Date().toISOString()) // opciono, samo info
     }
 
     static signup(payload: UserModel) {
@@ -106,8 +108,6 @@ export class UserService {
 
         localStorage.setItem('reviews', JSON.stringify(reviews));
     }
-
-
 
     static getCartItems() {
         const activeUser = this.getActiveUser()
