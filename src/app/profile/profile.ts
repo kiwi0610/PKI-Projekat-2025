@@ -1,53 +1,120 @@
-import { Component, signal, OnDestroy, OnInit } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserModel } from '../models/user.model';
 import { UserService } from '../services/user.service';
-import { Router, NavigationEnd } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { MainService } from '../services/main.service';
 
 @Component({
   selector: 'app-profile',
+  imports: [ReactiveFormsModule],
   templateUrl: './profile.html',
-  styleUrls: ['./profile.css']
+  styleUrl: './profile.css'
 })
-export class Profile implements OnInit, OnDestroy {
+export class Profile implements OnInit {
 
+  protected profileForm: FormGroup;
+  protected passwordForm: FormGroup;
   protected currentUser = signal<UserModel | null>(null);
-  private routerSub!: Subscription;
+  protected toyTypes = signal<string[]>([]);
+  protected editing = signal<boolean>(false); 
 
-  constructor(private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private router: Router) {
+    this.profileForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phone: ['', Validators.required],
+      toyType: ['', Validators.required]
+    });
 
-  ngOnInit() {
-    // Prvi load
-    this.loadUser();
-
-    // Subscribe na svaku navigaciju da osveži profil
-    this.routerSub = this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.loadUser();
-      }
+    this.passwordForm = this.formBuilder.group({
+      current: ['', Validators.required],
+      new: ['', Validators.required],
+      repeat: ['', Validators.required]
     });
   }
 
-  ngOnDestroy() {
-    this.routerSub.unsubscribe();
+  async ngOnInit() {
+    try {
+      const user = UserService.getActiveUser();
+      this.currentUser.set(user);
+
+      const rsp = await MainService.getToyTypes();
+      this.toyTypes.set(rsp.data);
+
+ 
+      this.profileForm.patchValue({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phone: user.phone,
+        toyType: user.toyType.name
+      });
+
+ 
+      this.profileForm.disable();
+    } catch {
+      this.router.navigate(['/login']);
+    }
   }
 
-  private loadUser() {
-    const active = localStorage.getItem('active');
+  protected onEditClick() {
+    this.editing.set(true);
+    this.profileForm.enable();
+  }
 
-    if (!active) {
-      this.router.navigate(['/login']);
+
+  protected onProfileSubmit() {
+    if (!this.profileForm.valid) {
+      alert('Forma nije ispravna!');
       return;
     }
 
-    const users = UserService.getUsers();
-    const found = users.find(u => u.email === active);
+    const user = this.currentUser()!;
+    const updated: UserModel = {
+      ...user,
+      firstName: this.profileForm.value.firstName,
+      lastName: this.profileForm.value.lastName,
+      phone: this.profileForm.value.phone,
+      toyType: {
+        typeId: this.toyTypes().indexOf(this.profileForm.value.toyType),
+        name: this.profileForm.value.toyType,
+        description: ''
+      }
+    };
 
-    if (!found) {
-      this.router.navigate(['/login']);
+    UserService.updateUser(updated);
+    this.currentUser.set(updated);
+    this.editing.set(false);
+    this.profileForm.disable();
+    alert('Podaci su uspešno sačuvani!');
+  }
+
+
+  protected onPasswordSubmit() {
+    if (!this.passwordForm.valid) {
+      alert('Popunite sva polja!');
       return;
     }
 
-    this.currentUser.set(found);
+    const { current, new: newPass, repeat } = this.passwordForm.value;
+    const user = this.currentUser()!;
+
+    if (current !== user.password) {
+      alert('Trenutna lozinka nije ispravna!');
+      return;
+    }
+    if (newPass !== repeat) {
+      alert('Nove lozinke se ne poklapaju!');
+      return;
+    }
+
+   
+    user.password = newPass;
+    UserService.updateUser(user);
+    this.currentUser.set(user);
+
+    alert('Lozinka je uspešno promenjena! Bićete preusmereni na login.');
+    UserService.logout();
+    this.router.navigateByUrl('/login');
   }
 }

@@ -14,7 +14,7 @@ export const routes: Routes = [
     { path: 'login', title: 'Login', component: Login },
     { path: 'signup', title: 'Signup', component: Signup },
     { path: '', title: 'Početna' ,component: Pocetna },                 // Za / se podrazumeva da se tu nalazi, zato je prazno
-    { path: 'igracke', title: 'Ponuda igračaka',component: Igracke },   // Isto važi i za ovaj deo, bice na putanji /about
+    { path: 'igracke', title: 'Ponuda igračaka',component: Igracke },  
     { path: 'profil', title: 'Profil', component: Profile},
     { path: 'detalji/:id/rezervacija', title: 'Rezervacija', component: Rezervisi},
     { path: 'detalji/:id', title: 'Detalji' , component: Details },

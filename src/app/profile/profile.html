@@ -1,49 +1,82 @@
-<div>
-    <div class="card">
+<div class="row">
+
+  <div class="col-12 col-md-8">
+    <form [formGroup]="profileForm" (ngSubmit)="onProfileSubmit()">
+      <div class="card mb-3">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5>User Profile</h5>
+          @if (!editing()) {
+            <button type="button" class="btn btn-sm btn-outline-primary" (click)="onEditClick()">
+              <i class="fa-solid fa-pen"></i> Edit
+            </button>
+          }
+        </div>
+
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label">Ime</label>
+            <input type="text" class="form-control" formControlName="firstName">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Prezime</label>
+            <input type="text" class="form-control" formControlName="lastName">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Telefon</label>
+            <input type="text" class="form-control" formControlName="phone">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Omiljena igračka</label>
+            <select class="form-select" formControlName="toyType">
+              @for (t of toyTypes(); track $index) {
+                <option [value]="t">{{t}}</option>
+              }
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email (ne može se menjati)</label>
+            <input type="email" class="form-control" [value]="currentUser()?.email" readonly>
+          </div>
+        </div>
+
+        @if (editing()) {
+          <div class="card-footer">
+            <button type="submit" class="btn btn-sm btn-primary">
+              <i class="fa-solid fa-floppy-disk"></i> Sačuvaj promene
+            </button>
+          </div>
+        }
+      </div>
+    </form>
+  </div>
+
+
+  <div class="col-12 col-md-4">
+    <form [formGroup]="passwordForm" (ngSubmit)="onPasswordSubmit()">
+      <div class="card mb-3">
         <div class="card-header">
-            <h5>User Profile</h5>
+          <h5>Resetuj lozinku</h5>
         </div>
-    </div>
-
-    <div class="card-body">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <table class="table table-striped table-hover">
-                    <tbody>
-                        <tr>
-                            <th scope="row">Ime:</th>
-                            <td>{{currentUser()?.firstName}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Prezime:</th>
-                            <td>{{currentUser()?.lastName}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Email:</th>
-                            <td>{{currentUser()?.email}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="col-12 col-md-6">
-                <table class="table table-striped table-hover">
-                    <tbody>
-                        <tr>
-                            <th scope="row">Telefon:</th>
-                            <td>{{currentUser()?.phone}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Tip igracke:</th>
-                            <td>{{currentUser()?.toyType}}</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label">Trenutna lozinka</label>
+            <input type="password" class="form-control" formControlName="current">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Nova lozinka</label>
+            <input type="password" class="form-control" formControlName="new">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Potvrdi lozinku</label>
+            <input type="password" class="form-control" formControlName="repeat">
+          </div>
         </div>
-
         <div class="card-footer">
-            <button class="btn btn-primary">Save Changes</button>
+          <button type="submit" class="btn btn-sm btn-secondary">
+            <i class="fa-solid fa-key"></i> Promeni lozinku
+          </button>
         </div>
-    </div>
+      </div>
+    </form>
+  </div>
+</div>
