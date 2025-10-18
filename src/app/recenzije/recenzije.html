@@ -1,0 +1,48 @@
+<div class="cart-container">
+    <h2>⭐ Moje recenzije</h2>
+
+    @if (reviews().length === 0) {
+    <p class="empty">Još uvek niste ocenili nijednu igračku.</p>
+    } @else {
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Naziv igračke</th>
+                <th>Količina</th>
+                <th>Cena</th>
+                <th>Moja ocena</th>
+                <th>Prosečna ocena</th>
+                <th>Datum ocenjivanja</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of reviews(); track i; let i = $index) {
+            <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.toyName }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ getItemPrice(item) | number:'1.2-2' }} RSD</td>
+
+                <!-- Moja ocena -->
+                <td>
+                    @for (star of [1,2,3,4,5]; track star) {
+                    <span (click)="updateRating(item, star)"
+                        [ngStyle]="{'color': (item.ratingValue && star <= item.ratingValue) ? 'gold' : 'gray', 'cursor': 'pointer'}">
+                        ★
+                    </span>
+                    }
+                </td>
+
+                <!-- Prosečna ocena -->
+                <td>
+                    {{ getAverageRating(item.toyId) | number:'1.1-1' }} ⭐
+                </td>
+
+                <td>{{ item.updatedAt | date:'dd.MM.yyyy. HH:mm' }}</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    }
+</div>
