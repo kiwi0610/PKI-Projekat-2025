@@ -7,6 +7,7 @@ import {Profile} from './profile/profile';
 import { Rezervisi } from './rezervisi/rezervisi';
 import { Details } from './details/details';
 import { Cart } from './cart/cart';
+import { Recenzije } from './recenzije/recenzije';
 
 
 export const routes: Routes = [
@@ -18,5 +19,6 @@ export const routes: Routes = [
     { path: 'detalji/:id/rezervacija', title: 'Rezervacija', component: Rezervisi},
     { path: 'detalji/:id', title: 'Detalji' , component: Details },
     { path: 'korpa', title: 'Korpa rezervacija' , component: Cart},
+    { path: 'recenzije', title: 'Recenzije' , component: Recenzije},
     { path: '**', redirectTo: '' }        // Ovde za bilo koju pogresno unetu putanju vraća na početnu stranicu
 ];

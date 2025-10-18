@@ -1,11 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, DecimalPipe],
   templateUrl: './cart.html',
   styleUrls: ['./cart.css']
 })
@@ -36,8 +36,6 @@ export class Cart {
       case 'waiting': return 'status-waiting';
       case 'paid': return 'status-paid';
       case 'canceled': return 'status-canceled';
-      case 'liked': return 'status-liked';
-      case 'desliked': return 'status-disliked';
       default: return '';
     }
   }
@@ -57,10 +55,10 @@ export class Cart {
   }
 
   cancelItem(index: number) {
-  const items = this.cartItems();
-  items[index].status = 'cancelled';
-  this.cartItems.set([...items]);
-}
+    const items = this.cartItems();
+    items[index].status = 'cancelled';
+    this.cartItems.set([...items]);
+  }
 
 
   payItem(index: number) {
@@ -85,6 +83,14 @@ export class Cart {
     alert('Sve igračke su plaćene! Možete ih oceniti.');
   }
 
+  // Ovo je za dugme plati sve i ukloni sve
+  // Dugmad "Plati sve" i "Ukloni sve" će biti disabled ako je korpa prazna
+  // ili ako su svi artikli plaćeni
+  isAllPaid(): boolean {
+    const items = this.cartItems();
+    return items.length === 0 || items.every(item => item.status === 'paid');
+  }
+
   clearCart() {
     this.saveCart([]);
   }
@@ -94,12 +100,40 @@ export class Cart {
     const item = items[index];
     if (!item || item.status !== 'paid') return;
 
+    // postavi ocenu
     item.ratingValue = value;
     item.updatedAt = new Date();
 
-    // save cart
-    UserService.updateCart(items);
-    this.cartItems.set(items);
+    // ukloni proizvod iz korpe
+    const filteredItems = items.filter((_, i) => i !== index);
+    this.saveCart(filteredItems); // čuva novu listu korpe
+    UserService.addReview(item); // dodaje u recenzije
+
+    this.cartItems.set(filteredItems);
+
+    alert(`${item.toyName} je ocenjen sa ${value} ⭐ i prebačen u recenzije.`);
+  }
+
+
+
+
+
+  // računa prosečnu ocenu za dati proizvod
+  getAverageRating(toyId: any): number {
+    const users = UserService.getUsers(); // svi korisnici
+    const allItems = users.flatMap(u => u.data || []);
+    const ratings = allItems
+      .filter(item => item.toyId === toyId && item.ratingValue !== undefined && item.ratingValue > 0)
+      .map(item => item.ratingValue!); // ! govori TS da nije undefined
+
+    if (ratings.length === 0) return 0;
+    const sum = ratings.reduce((a, b) => a + b, 0);
+    return sum / ratings.length;
+  }
+
+  // pomoćna funkcija za proveru boje zvezdica
+  isStarFilled(item: any, star: number) {
+    return item.ratingValue && star <= item.ratingValue;
   }
 
   getItemPrice(item: any) {

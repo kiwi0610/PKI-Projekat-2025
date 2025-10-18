@@ -4,20 +4,22 @@ import { ToysService } from '../services/toys.service';
 import { UserService } from '../services/user.service';
 import { ToyModel } from '../models/toy.model';
 import Swal from 'sweetalert2';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-rezervisi',
+  imports: [DecimalPipe, CommonModule],
   templateUrl: './rezervisi.html',
   styleUrls: ['./rezervisi.css']
 })
 export class Rezervisi {
 
   protected toy = signal<ToyModel | null>(null);
-  start: number = 1; 
+  start: number = 1;
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe((params: any) => {
-      
+
       if (!localStorage.getItem('active')) {
         sessionStorage.setItem('ref', `/details/${params.id}/book`);
         router.navigateByUrl('/login');
@@ -79,4 +81,19 @@ export class Rezervisi {
       alert('Greška prilikom dodavanja u korpu: ' + error.message);
     }
   }
+
+  getAverageRating(toyId: any): number {
+    const users = UserService.getUsers(); // svi korisnici
+    const allItems = users.flatMap(u => u.data || []); // sve korpe
+    const ratings = allItems
+      .filter(item => item.toyId === toyId && item.ratingValue && item.ratingValue > 0)
+      .map(item => item.ratingValue!); // sigurno je broj
+
+    if (ratings.length === 0) return 0; // još nema ocena
+
+    const sum = ratings.reduce((a, b) => a + b, 0);
+    return sum / ratings.length;
+  }
+
+
 }

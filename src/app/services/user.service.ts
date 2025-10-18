@@ -64,7 +64,7 @@ export class UserService {
                     toyId,
                     toyName,
                     amount,
-                    price,       
+                    price,
                     status,
                     createdAt: new Date(),
                     updatedAt: null
@@ -92,6 +92,20 @@ export class UserService {
         this.updateCart([]);
     }
 
+    static addReview(item: any) {
+        const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+
+        // proveri da li korisnik već ima recenziju za ovaj toyId
+        const existingIndex = reviews.findIndex((r: any) => r.toyId === item.toyId && r.userEmail === this.getActiveUser().email);
+
+        if (existingIndex !== -1) {
+            reviews[existingIndex] = item; // update postojeće
+        } else {
+            reviews.push({ ...item, userEmail: this.getActiveUser().email });
+        }
+
+        localStorage.setItem('reviews', JSON.stringify(reviews));
+    }
 
 
 

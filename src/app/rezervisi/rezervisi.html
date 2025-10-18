@@ -16,9 +16,20 @@
                     <li class="list-group-item"><strong>Tip:</strong> {{toy()?.type?.name}}</li>
                     <li class="list-group-item"><strong>Tip opis:</strong> {{toy()?.type?.description}}</li>
                     <li class="list-group-item"><strong>Grupa uzrasta:</strong> {{toy()?.ageGroup?.name}}</li>
-                    <li class="list-group-item"><strong>Grupa uzrasta opis:</strong> {{toy()?.ageGroup?.description}}</li>
+                    <li class="list-group-item"><strong>Grupa uzrasta opis:</strong> {{toy()?.ageGroup?.description}}
+                    </li>
                     <li class="list-group-item"><strong>Datum proizvodnje:</strong> {{toy()?.productionDate}}</li>
                     <li class="list-group-item"><strong>Cena:</strong> {{toy()?.price}} RSD</li>
+                    <li class="list-group-item">
+                        <strong>Recenzija:</strong>
+                        @if(getAverageRating(toy()?.toyId) > 0) {
+                        {{ getAverageRating(toy()?.toyId) | number:'1.1-1' }} ⭐
+                        } @else {
+                        Još nema ocena
+                        }
+                    </li>
+
+
                 </ul>
             </div>
         </div>
