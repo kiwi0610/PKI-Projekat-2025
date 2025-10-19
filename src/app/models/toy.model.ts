@@ -18,3 +18,15 @@ export interface ToyModel {
         description: string;
     };
 }
+
+export interface AgeGroup {
+    ageGroupId: number;
+    name: string;
+    description: string;
+}
+
+export interface ToyType {
+    typeId: number;
+    name: string;
+    description: string;
+}

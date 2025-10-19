@@ -45,7 +45,7 @@
     padding: 8px 16px;
     border-radius: 6px;
     font-weight: 600;
-    text-decoration: none;      /* Ovo mora da ostane ovako, jer me nervira da dugmići budu podvučeni(zbog a taga) */
+    text-decoration: none;
     color: #fff;
 }
 
@@ -65,22 +65,76 @@
     background-color: #1e7e34;
 }
 
+/* Centriran container za filtere i search */
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #c6dbf0;
+    padding: 15px 20px;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.filters-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter-group label {
+    font-weight: bold;
+    color: #386fa4;
+    font-size: 14px;
+}
+
+.filter-group select {
+    padding: 8px 12px;
+    border: 1px solid #386fa4;
+    border-radius: 6px;
+    background-color: white;
+    color: #333;
+    min-width: 150px;
+}
+
+/* Reset dugme */
+.reset-btn {
+    padding: 8px 16px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.2s ease;
+    height: 36px;
+}
+
+.reset-btn:hover {
+    background-color: #5a6268;
+}
+
 .search-bar {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-right: auto;
-    margin-left: auto;
-    text-align: center;
-    background-color: #c6dbf0;
 }
 
 .search-bar input {
-    padding: 20px;
+    padding: 12px 40px;
     border: none;
-    border-radius: 15px;
+    border-radius: 150px;
     outline: none;
-    width: 700px;
+    width: 1500px;
 }
 
 /* Razmak na vrhu */
@@ -92,4 +146,22 @@
 .divljak1 {
     background-color: #c6dbf0;
     height: 20px;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    width: 100%;
+}
+
+.no-results i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: #386fa4;
+}
+
+.no-results p {
+    font-size: 18px;
+    margin: 0 0 20px 0;
 }
