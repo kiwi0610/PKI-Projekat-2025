@@ -21,7 +21,9 @@ export class Rezervisi {
     this.route.params.subscribe((params: any) => {
 
       if (!localStorage.getItem('active')) {
-        sessionStorage.setItem('ref', `/details/${params.id}/book`);
+        // Sačuvaj trenutnu lokaciju pre nego što preusmerimo na login
+        const currentPath = `/detalji/${params.id}/rezervacija`;
+        sessionStorage.setItem('redirectUrl', currentPath);
         router.navigateByUrl('/login');
         return;
       }
@@ -49,7 +51,10 @@ export class Rezervisi {
     }
 
     if (!localStorage.getItem('active')) {
+      const currentPath = this.router.url;
+      sessionStorage.setItem('redirectUrl', currentPath);
       alert('Morate biti ulogovani da biste dodali u korpu!');
+      this.router.navigateByUrl('/login');
       return;
     }
 
@@ -73,6 +78,8 @@ export class Rezervisi {
       }).then((result) => {
         if (result.isConfirmed) {
           this.router.navigateByUrl('/korpa');
+        } else {
+          this.router.navigateByUrl('/igracke');
         }
       });
 
@@ -83,17 +90,14 @@ export class Rezervisi {
   }
 
   getAverageRating(toyId: any): number {
-    const users = UserService.getUsers(); // svi korisnici
-    const allItems = users.flatMap(u => u.data || []); // sve korpe
+    const users = UserService.getUsers();
+    const allItems = users.flatMap(u => u.data || []);
     const ratings = allItems
       .filter(item => item.toyId === toyId && item.ratingValue && item.ratingValue > 0)
-      .map(item => item.ratingValue!); // sigurno je broj
+      .map(item => item.ratingValue!);
 
-    if (ratings.length === 0) return 0; // još nema ocena
-
+    if (ratings.length === 0) return 0;
     const sum = ratings.reduce((a, b) => a + b, 0);
     return sum / ratings.length;
   }
-
-
 }

@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angula
 import { UserService } from '../services/user.service';
 import { Router, RouterLink } from '@angular/router';
 
-
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, RouterLink],
@@ -20,6 +19,7 @@ export class Login {
         password: ['', [Validators.required]]
       })
   }
+
   onSubmit() {
     if (!this.form.valid) {
       alert('Forma nije ispravna!')
@@ -27,13 +27,18 @@ export class Login {
     }
     try {
       UserService.login(this.form.value.email, this.form.value.password)
-      const url = sessionStorage.getItem(`ref`) ?? `/profile`
-      sessionStorage.removeItem(`ref`)
+
+      const redirectUrl = sessionStorage.getItem('redirectUrl');
       
-      this.router.navigateByUrl(`/`).then(() =>
-        {
-          this.router.navigateByUrl(url)
-        })
+      if (redirectUrl) {
+   
+        sessionStorage.removeItem('redirectUrl');
+
+        this.router.navigateByUrl(redirectUrl);
+      } else {
+
+        this.router.navigateByUrl('/profil');
+      }
 
     } catch (e) {
       alert('Proverite Vaše parametre za prijavljivanje!')
