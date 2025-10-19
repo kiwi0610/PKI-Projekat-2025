@@ -1,13 +1,14 @@
 <div class="divljak"></div>
 
 <div class="search-container">
+
   <div class="filters-container">
     <div class="filter-group">
       <label for="ageGroup">Uzrast:</label>
       <select id="ageGroup" [(ngModel)]="selectedAgeGroup" (change)="filterToys()">
         <option value="svi">Svi uzrasti</option>
         @for (ageGroup of ageGroups(); track ageGroup) {
-          <option [value]="ageGroup">{{ ageGroup }}</option>
+        <option [value]="ageGroup">{{ ageGroup }}</option>
         }
       </select>
     </div>
@@ -17,7 +18,7 @@
       <select id="toyType" [(ngModel)]="selectedType" (change)="filterToys()">
         <option value="svi">Svi tipovi</option>
         @for (type of toyTypes(); track type) {
-          <option [value]="type">{{ type }}</option>
+        <option [value]="type">{{ type }}</option>
         }
       </select>
     </div>
@@ -41,44 +42,44 @@
   <div class="search-bar">
     <input type="text" placeholder="Pretraži igračke..." [(ngModel)]="pretraga" (input)="filterToys()" />
   </div>
+  
 </div>
 
 <div class="divljak1"></div>
 
 <div class="cards-container">
-    @if (filteredToys().length > 0) {
-      @for (toy of filteredToys(); track $index) {
-        <div class="card">
-            <img [src]="'https://toy.pequla.com' + toy.imageUrl" alt="{{ toy.name }}" class="card-img">
-            <div class="card-header">
-                {{ toy.name }}
-            </div>
-            <div class="card-body">
-                <p><strong>Tip:</strong> {{ toy.type.name }}</p>
-                <p><strong>Opis:</strong> {{ toy.description }}</p>
-                <p><strong>Cena:</strong> {{ toy.price }} RSD</p>
-                <p><strong>Uzrast:</strong> {{ toy.ageGroup.name }}</p>
-                <p><strong>Pol:</strong> {{ toy.targetGroup || 'Nije specificiran' }}</p>
-            </div>
-            <div class="card-footer">
-                <div class="button-group">
-                    <a [routerLink]="`/detalji/${toy.toyId}`" class="button-blue">
-                        <i class="fa-solid fa-circle-info"></i>Detalji
-                    </a>
-                    <a [routerLink]="`/detalji/${toy.toyId}/rezervacija`" class="button-green">
-                        <i class="fa-solid fa-cart-shopping"></i>Rezerviši
-                    </a>
-                </div>
-            </div>
-        </div>
-      }
-    } @else {
-      <div class="no-results">
-        <i class="fa-solid fa-search"></i>
-        <p>Nema igračaka koje odgovoraju zadatim kriterijumima.</p>
-        <button class="reset-btn" (click)="resetFilters()">
-          <i class="fa-solid fa-rotate-left"></i> Resetuj filtere
-        </button>
+
+  @for (toy of filteredToys(); track $index) {
+
+  <div class="card">
+
+    <img [src]="'https://toy.pequla.com' + toy.imageUrl" alt="{{ toy.name }}" class="card-img">
+
+    <div class="card-header">
+      {{ toy.name }}
+    </div>
+
+    <div class="card-body">
+      <p><strong>Tip:</strong> {{ toy.type.name }}</p>
+      <p><strong>Opis:</strong> {{ toy.description }}</p>
+      <p><strong>Cena:</strong> {{ toy.price }} RSD</p>
+      <p class="reviews"><strong>Prosečna ocena:</strong> {{ getAverageRating(toy.toyId) | number:'1.1-1' }} ⭐</p>
+    </div>
+
+
+    <div class="card-footer">
+      <div class="button-group">
+        <a [routerLink]="`/detalji/${toy.toyId}`" class="button-blue">
+          <i class="fa-solid fa-circle-info"></i>Detalji
+        </a>
+
+        <a [routerLink]="`/detalji/${toy.toyId}/rezervacija`" class="button-green">
+          <i class="fa-solid fa-cart-shopping"></i>Rezerviši
+        </a>
       </div>
-    }
+    </div>
+
+  </div>
+
+  }
 </div>

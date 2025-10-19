@@ -3,11 +3,10 @@ import { MainService } from '../services/main.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../services/user.service';
-//import { NgClass } from "../../../node_modules/@angular/common/common_module.d";
 
 @Component({
   selector: 'app-signup',
-  imports: [/*NgClass*/ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './signup.html',
   styleUrl: './signup.css'
 })

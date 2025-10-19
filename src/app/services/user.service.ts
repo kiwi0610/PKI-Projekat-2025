@@ -14,7 +14,7 @@ export class UserService {
           phone: '+38163123123',
           password: 'user123',
           toyTypes: 'plisana igracka',
-          data: [] 
+          data: []
         }
       ]));
     }
@@ -136,27 +136,25 @@ export class UserService {
     this.updateCart([]);
   }
 
+  static addReview(review: any) {
+    const allReviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+    const activeUser = this.getActiveUser();
 
-  static addReview(item: any) {
-    const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
-    const currentUser = this.getActiveUser();
+    // osiguraj da ima email
+    review.userEmail = activeUser?.email;
 
-    const existingIndex = reviews.findIndex(
-      (r: any) => r.toyId === item.toyId && r.userEmail === currentUser.email
+    const index = allReviews.findIndex(
+      (r: any) => r.toyId === review.toyId && r.userEmail === review.userEmail
     );
 
-    if (existingIndex !== -1) {
-      reviews[existingIndex] = item;
+    if (index !== -1) {
+      // UVEK ažuriraj, čak i ako je ista ocena
+      allReviews[index] = { ...allReviews[index], ...review };
     } else {
-      reviews.push({ ...item, userEmail: currentUser.email });
+      allReviews.push(review);
     }
 
-    localStorage.setItem('reviews', JSON.stringify(reviews));
+    localStorage.setItem('reviews', JSON.stringify(allReviews));
   }
 
- 
-  static getCartItems() {
-    const activeUser = this.getActiveUser();
-    return activeUser.data || [];
-  }
 }

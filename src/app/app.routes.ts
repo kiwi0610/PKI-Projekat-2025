@@ -20,5 +20,5 @@ export const routes: Routes = [
     { path: 'detalji/:id', title: 'Detalji' , component: Details },
     { path: 'korpa', title: 'Korpa rezervacija' , component: Cart},
     { path: 'recenzije', title: 'Recenzije' , component: Recenzije},
-    { path: '**', redirectTo: '' }        // Ovde za bilo koju pogresno unetu putanju vraća na početnu stranicu
+    { path: '**', redirectTo: '' }                                      // Ovde za bilo koju pogresno unetu putanju vraća na početnu stranicu
 ];

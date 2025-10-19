@@ -51,11 +51,12 @@
                 <td colspan="4" class="text-right">Ukupno:</td>
                 <td>{{ getTotalPrice() | number:'1.2-2' }} RSD</td>
                 <td colspan="3">
-                    <button (click)="clearCart()" class="btn-remove-all" [disabled]="isAllPaid()">🗑️ Ukloni
+                    <button (click)="clearCart()" class="btn-remove-all" [disabled]="!canClearCart()">🗑️ Ukloni
                         sve</button>
                     <button (click)="payAll()" class="btn-pay-all" [disabled]="isAllPaid()">💳 Plati sve</button>
                 </td>
             </tr>
         </tfoot>
+
     </table>
 </div>

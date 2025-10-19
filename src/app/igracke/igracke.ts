@@ -3,11 +3,12 @@ import { ToysService } from '../services/toys.service';
 import { RouterLink } from '@angular/router';
 import { ToyModel } from '../models/toy.model';
 import { FormsModule } from '@angular/forms';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-igracke',
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, CommonModule, DecimalPipe],
   templateUrl: './igracke.html',
   styleUrls: ['./igracke.css']
 })
@@ -16,11 +17,11 @@ export class Igracke implements OnInit {
   protected toys = signal<ToyModel[]>([]);
   protected filteredToys = signal<ToyModel[]>([]);
   protected pretraga: string = '';
-  
+
   protected selectedAgeGroup = signal<string>('svi');
   protected selectedType = signal<string>('svi');
   protected selectedTargetGroup = signal<string>('svi');
-  
+
   protected ageGroups = signal<string[]>([]);
   protected toyTypes = signal<string[]>([]);
 
@@ -41,7 +42,7 @@ export class Igracke implements OnInit {
     this.ageGroups.set(uniqueAgeGroups);
     console.log('Uzrasti:', uniqueAgeGroups);
 
- 
+
     const uniqueTypes = [...new Set(toys.map(toy => toy.type.name))];
     this.toyTypes.set(uniqueTypes);
     console.log('Tipovi:', uniqueTypes);
@@ -56,23 +57,23 @@ export class Igracke implements OnInit {
     const targetGroupFilter = this.selectedTargetGroup();
 
     const filtered = this.toys().filter(toy => {
- 
-      const matchesSearch = !searchTerm || 
+
+      const matchesSearch = !searchTerm ||
         toy.name.toLowerCase().includes(searchTerm) ||
         toy.description.toLowerCase().includes(searchTerm) ||
         toy.type.name.toLowerCase().includes(searchTerm);
 
- 
-      const matchesAgeGroup = ageGroupFilter === 'svi' || 
-                             toy.ageGroup.name === ageGroupFilter;
 
-    
-      const matchesType = typeFilter === 'svi' || 
-                         toy.type.name === typeFilter;
+      const matchesAgeGroup = ageGroupFilter === 'svi' ||
+        toy.ageGroup.name === ageGroupFilter;
 
-    
-      const matchesTargetGroup = targetGroupFilter === 'svi' || 
-                               toy.targetGroup?.toLowerCase() === targetGroupFilter.toLowerCase();
+
+      const matchesType = typeFilter === 'svi' ||
+        toy.type.name === typeFilter;
+
+
+      const matchesTargetGroup = targetGroupFilter === 'svi' ||
+        toy.targetGroup?.toLowerCase() === targetGroupFilter.toLowerCase();
 
       return matchesSearch && matchesAgeGroup && matchesType && matchesTargetGroup;
     });
@@ -87,4 +88,14 @@ export class Igracke implements OnInit {
     this.pretraga = '';
     this.filterToys();
   }
+
+  getAverageRating(toyId: number): number {
+    const allReviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+    const ratings = allReviews
+      .filter((r: any) => r.toyId === toyId && r.ratingValue > 0)
+      .map((r: any) => r.ratingValue);
+    if (ratings.length === 0) return 0;
+    return ratings.reduce((a: number, b: number) => a + b, 0) / ratings.length;
+  }
+
 }

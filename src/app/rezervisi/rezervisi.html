@@ -1,53 +1,51 @@
-<div class="body">
-    <div class="card">
+<body>
+    <div class="cards-container">
 
-        <div class="card-top">
+        <div class="card card-horizontal">
+
             <div class="card-img">
-                <img [src]="'https://toy.pequla.com' + toy()?.imageUrl" alt="{{toy()?.name}}">
+                <img [src]="'https://toy.pequla.com' + toy()?.imageUrl" alt="{{ toy()?.name }}">
             </div>
 
             <div class="card-body">
                 <div class="card-header">
-                    <h2>{{toy()?.name}}</h2>
+                    {{ toy()?.name }}
                 </div>
-                <ul class="list-group">
-                    <li class="list-group-item"><strong>toyId:</strong> {{toy()?.toyId}}</li>
-                    <li class="list-group-item"><strong>Opis:</strong> {{toy()?.description}}</li>
-                    <li class="list-group-item"><strong>Tip:</strong> {{toy()?.type?.name}}</li>
-                    <li class="list-group-item"><strong>Tip opis:</strong> {{toy()?.type?.description}}</li>
-                    <li class="list-group-item"><strong>Grupa uzrasta:</strong> {{toy()?.ageGroup?.name}}</li>
-                    <li class="list-group-item"><strong>Grupa uzrasta opis:</strong> {{toy()?.ageGroup?.description}}
-                    </li>
-                    <li class="list-group-item"><strong>Datum proizvodnje:</strong> {{toy()?.productionDate}}</li>
-                    <li class="list-group-item"><strong>Cena:</strong> {{toy()?.price}} RSD</li>
-                    <li class="list-group-item">
-                        <strong>Recenzija:</strong>
-                        @if(getAverageRating(toy()?.toyId) > 0) {
+                <p><strong>toyId:</strong> {{ toy()?.toyId }}</p>
+                <p><strong>Opis:</strong> {{ toy()?.description }}</p>
+                <p><strong>Tip:</strong> {{ toy()?.type?.name }}</p>
+                <p><strong>Grupa uzrasta:</strong> {{ toy()?.ageGroup?.name }}</p>
+                <p><strong>Grupa uzrasta opis:</strong> {{ toy()?.ageGroup?.description }}</p>
+                <p><strong>Cena:</strong> {{ toy()?.price }} RSD</p>
+                <p class="reviews">
+                    <strong>Prosečna ocena:</strong>
+                    <span *ngIf="getAverageRating(toy()?.toyId) > 0; else noRating">
                         {{ getAverageRating(toy()?.toyId) | number:'1.1-1' }} ⭐
-                        } @else {
+                    </span>
+                    <ng-template #noRating>
                         Još nema ocena
-                        }
-                    </li>
+                    </ng-template>
+                </p>
 
+                <div class="card-footer">
+                    <div class="quantity-control">
+                        <button type="button" class="btn-qty" (click)="decreaseStart()">−</button>
+                        <span class="quantity">{{ start }}</span>
+                        <button type="button" class="btn-qty" (click)="increaseStart()">+</button>
+                    </div>
 
-                </ul>
+                    <button class="btn-add-to-cart" (click)="onSubmit()">
+                        <i class="fa-solid fa-cart-shopping"></i> Dodaj u korpu
+                    </button>
+
+                    <p class="price-total">
+                        Ukupno: <strong>{{ (toy()?.price ?? 0) * start }} RSD</strong>
+                    </p>
+                </div>
+
             </div>
+
         </div>
 
-        <div class="card-footer">
-            <div class="quantity-control">
-                <button type="button" class="btn-qty" (click)="decreaseStart()">−</button>
-                <span class="quantity">{{ start }}</span>
-                <button type="button" class="btn-qty" (click)="increaseStart()">+</button>
-            </div>
-
-            <button class="btn-add-to-cart" (click)="onSubmit()">
-                <i class="fa-solid fa-cart-shopping"></i> Dodaj u korpu
-            </button>
-
-            <p class="price-total">
-                Ukupno: <strong>{{ (toy()?.price ?? 0) * start }} RSD</strong>
-            </p>
-        </div>
     </div>
-</div>
+</body>

@@ -1,13 +1,10 @@
-/* Celokupna pozadina stranice */
 .cart-container {
     background-color: #e0f2ff;
-    /* svetlo plava */
     padding: 20px;
     min-height: 100vh;
     font-family: Arial, sans-serif;
 }
 
-/* Naslov */
 .cart-container h2 {
     text-align: center;
     margin-bottom: 25px;
@@ -15,7 +12,6 @@
     letter-spacing: 1px;
 }
 
-/* Tabela */
 .cart-table {
     width: 100%;
     border-collapse: collapse;
@@ -26,7 +22,6 @@
     overflow: hidden;
 }
 
-/* Zaglavlje */
 .cart-table th {
     background-color: #cfe3f2;
     color: #333;
@@ -36,7 +31,6 @@
     font-size: 14px;
 }
 
-/* Ćelije */
 .cart-table td {
     padding: 10px 12px;
     border-bottom: 1px solid #d6e3ed;
@@ -44,12 +38,10 @@
     font-size: 15px;
 }
 
-/* Svaka druga vrsta svetlija radi čitljivosti */
 .cart-table tr:nth-child(even) {
     background-color: #eef6fb;
 }
 
-/* Akcije dugmad */
 .btn-remove,
 .btn-pay {
     margin: 2px;
@@ -82,7 +74,6 @@
     transform: scale(1.05);
 }
 
-/* Dugmad u footeru */
 .btn-remove-all,
 .btn-pay-all {
     padding: 8px 18px;
@@ -115,7 +106,6 @@
     transform: scale(1.05);
 }
 
-/* Disabled dugmad */
 button:disabled {
     background-color: #c8d1db !important;
     color: #666 !important;
@@ -124,7 +114,6 @@ button:disabled {
     transform: none;
 }
 
-/* Status klase */
 .status-waiting {
     color: #ff9800;
     font-weight: bold;
@@ -141,7 +130,6 @@ button:disabled {
     font-weight: bold;
 }
 
-/* Ocene */
 .rating-stars {
     display: inline-block;
     cursor: pointer;
@@ -163,29 +151,21 @@ button:disabled {
     transform: scale(1.1);
 }
 
-/* Footer dugmad ispod kolone Akcije, jedno pored drugog */
 .cart-table tfoot td:nth-child(7) {
     position: relative;
-    /* omogućava pozicioniranje */
 }
 
-/* Dugmad “Plati sve” i “Ukloni sve” */
 .cart-table tfoot td:nth-child(7) .btn-pay-all,
 .cart-table tfoot td:nth-child(7) .btn-remove-all {
     display: inline-block;
-    /* jedno pored drugog */
     margin-top: 5px;
-    /* malo prostora ispod prethodnih dugmica */
     padding: 4px 10px;
-    /* manja veličina */
     font-size: 13px;
-    /* manji font */
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-/* Disabled dugmad */
 .cart-table tfoot td:nth-child(7) .btn-pay-all:disabled,
 .cart-table tfoot td:nth-child(7) .btn-remove-all:disabled {
     background-color: #c8d1db !important;

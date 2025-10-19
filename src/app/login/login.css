@@ -1,13 +1,11 @@
-/* Glavni kontejner */
 .cards-container {
     display: flex;
-    flex-direction: column;       /* da bi naslov bio iznad forme */
-    align-items: center;          /* centriranje horizontalno */
+    flex-direction: column;       
+    align-items: center;          
     min-height: 100vh;
     background-color: #cfe8ef;
 }
 
-/* Naslov Signup */
 .card-header h5 {
     text-align: center;
     font-size: 28px;
@@ -15,7 +13,6 @@
     font-weight: 800px;
 }
 
-/* Forma */
 .card-body {
     background-color: #ffffff;
     padding: 32px;
@@ -23,14 +20,12 @@
     width: 400px;
 }
 
-/* Pojedinačna polja */
 .card {
     display: flex;
     flex-direction: column;
     margin-bottom: 16px;
 }
 
-/* Labela iznad inputa */
 .form-label {
     font-weight: 500;
     margin-bottom: 6px;
@@ -39,7 +34,6 @@
     font-size: 15px;
 }
 
-/* Inputi i select */
 .form-control,
 .form-select {
     padding: 10px;
@@ -56,7 +50,6 @@
     outline: none;
 }
 
-/* Dugme Submit */
 .btn-primary {
     width: 100%;
     background-color: #007bff;
@@ -74,7 +67,6 @@
     background-color: #0056b3;
 }
 
-/* Link ka login stranici */
 .btn-link {
     display: block;
     text-align: center;

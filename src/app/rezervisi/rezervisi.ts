@@ -90,14 +90,13 @@ export class Rezervisi {
   }
 
   getAverageRating(toyId: any): number {
-    const users = UserService.getUsers();
-    const allItems = users.flatMap(u => u.data || []);
-    const ratings = allItems
-      .filter(item => item.toyId === toyId && item.ratingValue && item.ratingValue > 0)
-      .map(item => item.ratingValue!);
+    // Uzmi sve ocene iz localStorage
+    const allReviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+    const ratings = allReviews
+      .filter((r: any) => r.toyId === toyId && r.ratingValue > 0)
+      .map((r: any) => r.ratingValue);
 
     if (ratings.length === 0) return 0;
-    const sum = ratings.reduce((a, b) => a + b, 0);
-    return sum / ratings.length;
+    return ratings.reduce((a: number, b: number) => a + b, 0) / ratings.length;
   }
 }

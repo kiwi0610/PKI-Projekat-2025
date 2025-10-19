@@ -11,15 +11,15 @@ import { ToysService } from '../services/toys.service';
 })
 export class Details {
   protected toy = signal<ToyModel | null>(null)
-  
+
   constructor(private route: ActivatedRoute) {
-  this.route.params.subscribe((params: any) => {
-  console.log('PARAMS:', params); // ovo će sada biti {id: 5} npr.
-  ToysService.getToysById(params.id)  // <-- koristimo "id", ne "toyId"
-    .then(rsp => this.toy.set(rsp.data))
-    .catch(err => console.error(err));
-});
-}
+    this.route.params.subscribe((params: any) => {
+      console.log('PARAMS:', params); // ovo će sada biti {id: 5} npr.
+      ToysService.getToysById(params.id)  // <-- koristimo "id", ne "toyId"
+        .then(rsp => this.toy.set(rsp.data))
+        .catch(err => console.error(err));
+    });
+  }
 
 
   convertToString() {
@@ -35,6 +35,6 @@ export class Details {
       minute: '2-digit'
     })
   }
-  
+
 }
 

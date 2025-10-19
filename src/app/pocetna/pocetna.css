@@ -5,13 +5,11 @@ body {
     margin: 0;
 }
 
-/* Razmak na vrhu */
 .divljak {
     background-color: #c6dbf0;
     height: 30px;
 }
 
-/* Pokretni tekst */
 .pokretni {
     position: relative;
     width: auto;
@@ -43,7 +41,6 @@ body {
     }
 }
 
-/* Main sekcija */
 .main-section {
     display: flex;
     justify-content: space-between;
@@ -55,13 +52,11 @@ body {
     gap: 0px;
 }
 
-/* Leva kolona */
 .main-text {
     flex: 1;
     max-width: 50%;
 }
 
-/* Kartice */
 .feature-cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -92,7 +87,6 @@ h1 {
     background-color: #7bb9d9;
 }
 
-/* Desna kolona: slika */
 .main-image {
     flex: 1;
     display: flex;

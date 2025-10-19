@@ -29,9 +29,9 @@ export class Login {
       UserService.login(this.form.value.email, this.form.value.password)
 
       const redirectUrl = sessionStorage.getItem('redirectUrl');
-      
+
       if (redirectUrl) {
-   
+
         sessionStorage.removeItem('redirectUrl');
 
         this.router.navigateByUrl(redirectUrl);

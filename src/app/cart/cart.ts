@@ -18,14 +18,14 @@ export class Cart {
 
   loadCart() {
     try {
-      const items = UserService.getCartItems();
-      // inicijalizuj ratingValue za sve paid ali neocenjene
+      const activeUser = UserService.getActiveUser();
+      const items = activeUser.data || [];
       items.forEach(item => {
         if (item.status === 'paid' && item.ratingValue === undefined) {
           item.ratingValue = 0;
         }
       });
-      this.cartItems.set(items || []);
+      this.cartItems.set(items);
     } catch {
       this.cartItems.set([]);
     }
@@ -51,15 +51,39 @@ export class Cart {
       items.splice(index, 1);
     }
 
+    // Ažuriraj localStorage i aktivnog korisnika
     this.saveCart(items);
   }
 
-  cancelItem(index: number) {
-    const items = this.cartItems();
-    items[index].status = 'cancelled';
-    this.cartItems.set([...items]);
+  private saveCart(items: any[]) {
+    const activeUser = UserService.getActiveUser();
+    const users = UserService.getUsers();
+
+    // update svih korisnika
+    const updatedUsers = users.map(u => {
+      if (u.email === activeUser.email) {
+        u.data = items;
+      }
+      return u;
+    });
+
+    // čuvaj sve korisnike
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+
+    // update aktivnog korisnika odmah
+    const updatedActiveUser = { ...activeUser, data: items };
+    localStorage.setItem('activeUser', JSON.stringify(updatedActiveUser));
+
+    // update signala
+    this.cartItems.set(items);
   }
 
+
+  cancelItem(index: number) {
+    const items = [...this.cartItems()];
+    items[index].status = 'cancelled';
+    this.saveCart(items);
+  }
 
   payItem(index: number) {
     const items = [...this.cartItems()];
@@ -68,7 +92,6 @@ export class Cart {
 
     item.status = 'paid';
     item.updatedAt = new Date();
-
     this.saveCart(items);
     alert(`${item.toyName} je uspešno plaćen!`);
   }
@@ -83,16 +106,18 @@ export class Cart {
     alert('Sve igračke su plaćene! Možete ih oceniti.');
   }
 
-  // Ovo je za dugme plati sve i ukloni sve
-  // Dugmad "Plati sve" i "Ukloni sve" će biti disabled ako je korpa prazna
-  // ili ako su svi artikli plaćeni
+  clearCart() {
+    this.saveCart([]);
+  }
+
+  // Helper za dugmad
   isAllPaid(): boolean {
     const items = this.cartItems();
     return items.length === 0 || items.every(item => item.status === 'paid');
   }
 
-  clearCart() {
-    this.saveCart([]);
+  canClearCart(): boolean {
+    return this.cartItems().length > 0;
   }
 
   rateItem(index: number, value: number) {
@@ -100,38 +125,28 @@ export class Cart {
     const item = items[index];
     if (!item || item.status !== 'paid') return;
 
-    // postavi ocenu
     item.ratingValue = value;
     item.updatedAt = new Date();
 
-    // ukloni proizvod iz korpe
-    const filteredItems = items.filter((_, i) => i !== index);
-    this.saveCart(filteredItems); // čuva novu listu korpe
-    UserService.addReview(item); // dodaje u recenzije
+    UserService.addReview(item);
 
+    const filteredItems = items.filter((_, i) => i !== index);
+    this.saveCart(filteredItems);
     this.cartItems.set(filteredItems);
 
     alert(`${item.toyName} je ocenjen sa ${value} ⭐ i prebačen u recenzije.`);
   }
 
-
-
-
-
-  // računa prosečnu ocenu za dati proizvod
   getAverageRating(toyId: any): number {
-    const users = UserService.getUsers(); // svi korisnici
+    const users = UserService.getUsers();
     const allItems = users.flatMap(u => u.data || []);
     const ratings = allItems
       .filter(item => item.toyId === toyId && item.ratingValue !== undefined && item.ratingValue > 0)
-      .map(item => item.ratingValue!); // ! govori TS da nije undefined
-
+      .map(item => item.ratingValue!);
     if (ratings.length === 0) return 0;
-    const sum = ratings.reduce((a, b) => a + b, 0);
-    return sum / ratings.length;
+    return ratings.reduce((a, b) => a + b, 0) / ratings.length;
   }
 
-  // pomoćna funkcija za proveru boje zvezdica
   isStarFilled(item: any, star: number) {
     return item.ratingValue && star <= item.ratingValue;
   }
@@ -144,18 +159,4 @@ export class Cart {
     return this.cartItems().reduce((sum, item) => sum + this.getItemPrice(item), 0);
   }
 
-  private saveCart(items: any[]) {
-    const activeUser = UserService.getActiveUser();
-    const users = UserService.getUsers();
-
-    const updatedUsers = users.map(u => {
-      if (u.email === activeUser.email) {
-        u.data = items;
-      }
-      return u;
-    });
-
-    localStorage.setItem('users', JSON.stringify(updatedUsers));
-    this.cartItems.set(items);
-  }
 }

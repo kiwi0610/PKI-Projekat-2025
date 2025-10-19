@@ -17,7 +17,7 @@ export class Profile implements OnInit {
   protected passwordForm: FormGroup;
   protected currentUser = signal<UserModel | null>(null);
   protected toyTypes = signal<string[]>([]);
-  protected editing = signal<boolean>(false); 
+  protected editing = signal<boolean>(false);
 
   constructor(private formBuilder: FormBuilder, private router: Router) {
     this.profileForm = this.formBuilder.group({
@@ -42,7 +42,7 @@ export class Profile implements OnInit {
       const rsp = await MainService.getToyTypes();
       this.toyTypes.set(rsp.data);
 
- 
+
       this.profileForm.patchValue({
         firstName: user.firstName,
         lastName: user.lastName,
@@ -50,7 +50,7 @@ export class Profile implements OnInit {
         toyType: user.toyType.name
       });
 
- 
+
       this.profileForm.disable();
     } catch {
       this.router.navigate(['/login']);
@@ -108,7 +108,7 @@ export class Profile implements OnInit {
       return;
     }
 
-   
+
     user.password = newPass;
     UserService.updateUser(user);
     this.currentUser.set(user);
