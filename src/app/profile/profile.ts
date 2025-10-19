@@ -42,14 +42,12 @@ export class Profile implements OnInit {
       const rsp = await MainService.getToyTypes();
       this.toyTypes.set(rsp.data);
 
-
       this.profileForm.patchValue({
         firstName: user.firstName,
         lastName: user.lastName,
         phone: user.phone,
         toyType: user.toyType.name
       });
-
 
       this.profileForm.disable();
     } catch {
@@ -61,7 +59,6 @@ export class Profile implements OnInit {
     this.editing.set(true);
     this.profileForm.enable();
   }
-
 
   protected onProfileSubmit() {
     if (!this.profileForm.valid) {
@@ -76,7 +73,7 @@ export class Profile implements OnInit {
       lastName: this.profileForm.value.lastName,
       phone: this.profileForm.value.phone,
       toyType: {
-        typeId: this.toyTypes().indexOf(this.profileForm.value.toyType),
+        typeId: this.toyTypes().indexOf(this.profileForm.value.toyType) + 1,
         name: this.profileForm.value.toyType,
         description: ''
       }
@@ -86,9 +83,7 @@ export class Profile implements OnInit {
     this.currentUser.set(updated);
     this.editing.set(false);
     this.profileForm.disable();
-    alert('Podaci su uspešno sačuvani!');
   }
-
 
   protected onPasswordSubmit() {
     if (!this.passwordForm.valid) {
@@ -108,13 +103,6 @@ export class Profile implements OnInit {
       return;
     }
 
-
-    user.password = newPass;
-    UserService.updateUser(user);
-    this.currentUser.set(user);
-
-    alert('Lozinka je uspešno promenjena! Bićete preusmereni na login.');
-    UserService.logout();
-    this.router.navigateByUrl('/login');
+    UserService.updateUserPassword(newPass);
   }
 }

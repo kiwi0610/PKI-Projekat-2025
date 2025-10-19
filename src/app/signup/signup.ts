@@ -32,22 +32,30 @@ export class Signup {
 
   onSubmit() {
     if (!this.form.valid) {
-      alert('Forma nije ispravna!')
-      return
+      alert('Forma nije ispravno popunjena!');
+      return;
     }
     if (this.form.value.password !== this.form.value.repeat) {
-      alert('Šifre se ne poklapaju!')
-      return
+      alert('Šifre se ne poklapaju!');
+      return;
     }
 
     try {
       const formValue: any = this.form.value
       delete formValue.repeat
-      UserService.signup(formValue)
-      this.router.navigateByUrl('/login')
+      
+      formValue.toyType = {
+        typeId: this.toyTypes().indexOf(this.form.value.toyType) + 1,
+        name: this.form.value.toyType,
+        description: ''
+      }
+      
+      UserService.signup(formValue);
+      alert('Nalog je uspešno kreiran!');
+      this.router.navigateByUrl('/login');
+      
     } catch (e) {
-      console.error(e)
-      alert('Popunite sva prazna polja!')
+     
     }
   }
 }

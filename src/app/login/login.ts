@@ -22,26 +22,23 @@ export class Login {
 
   onSubmit() {
     if (!this.form.valid) {
-      alert('Forma nije ispravna!')
-      return
+      alert('Forma nije ispravna!');
+      return;
     }
     try {
-      UserService.login(this.form.value.email, this.form.value.password)
+      UserService.login(this.form.value.email, this.form.value.password);
 
       const redirectUrl = sessionStorage.getItem('redirectUrl');
 
       if (redirectUrl) {
-
         sessionStorage.removeItem('redirectUrl');
-
         this.router.navigateByUrl(redirectUrl);
       } else {
-
         this.router.navigateByUrl('/profil');
       }
 
     } catch (e) {
-      alert('Proverite Vaše parametre za prijavljivanje!')
+      
     }
   }
 }

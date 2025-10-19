@@ -74,7 +74,7 @@ export class Cart {
     const updatedActiveUser = { ...activeUser, data: items };
     localStorage.setItem('activeUser', JSON.stringify(updatedActiveUser));
 
-    // update signala
+
     this.cartItems.set(items);
   }
 
@@ -110,7 +110,7 @@ export class Cart {
     this.saveCart([]);
   }
 
-  // Helper za dugmad
+
   isAllPaid(): boolean {
     const items = this.cartItems();
     return items.length === 0 || items.every(item => item.status === 'paid');
