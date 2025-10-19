@@ -8,7 +8,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* Glavni raspored */
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -18,7 +17,6 @@
     max-width: 1200px;
 }
 
-/* Kartice */
 .card {
     background: #ffffff;
     border-radius: 18px;
@@ -28,7 +26,6 @@
     max-width: 500px;
 }
 
-/* Naslov svake kartice */
 .card-header h5 {
     text-align: center;
     color: #2e6da4;
@@ -37,7 +34,6 @@
     margin-bottom: 25px;
 }
 
-/* Polja unutar kartice */
 .card-body {
     display: flex;
     flex-direction: column;
@@ -59,7 +55,6 @@
     background-color: #f8fbff;
 }
 
-/* Dugmad */
 .card-footer {
     display: flex;
     justify-content: center;
@@ -88,7 +83,6 @@ button,
     color: #2e6da4;
 }
 
-/* Separator između kartica */
 .divider {
     width: 100%;
     height: 2px;
@@ -96,7 +90,6 @@ button,
     margin: 10px 0;
 }
 
-/* Responsivno */
 @media (max-width: 768px) {
     .row {
         flex-direction: column;

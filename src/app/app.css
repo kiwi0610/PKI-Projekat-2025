@@ -1,4 +1,3 @@
-/* Header */
 header {
     background-color: #85c7de;
     padding: 25px 40px;
@@ -18,7 +17,6 @@ header {
     margin-bottom: 15px;
 }
 
-/* Navigacija */
 nav {
     display: flex;
     align-items: center;
@@ -37,7 +35,6 @@ nav {
     padding: 0;
 }
 
-/* Linkovi u navigaciji */
 .nav-links a {
     color: white;
     text-decoration: none;
@@ -54,12 +51,10 @@ nav {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Efekat pritiska */
 .nav-links a:active {
     transform: scale(0.97);
 }
 
-/* Login i Logout pozicija */
 .auth-section {
     position: absolute;
     right: 40px;
@@ -67,7 +62,6 @@ nav {
     transform: translateY(-50%);
 }
 
-/* Dugmad za login/logout */
 .auth-btn {
     display: inline-flex;
     align-items: center;
