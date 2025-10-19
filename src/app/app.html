@@ -1,49 +1,33 @@
 <header>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <div class="header-container">
+
     <div class="logo">
       <h1>Digitalna prodavnica igračaka za decu</h1>
     </div>
+
     <nav>
-      <ul>
-        <li><a routerLink="/">
-            <i class="fa-solid fa-house-chimney"></i>
-            Početna</a></li>
-
-        <li><a routerLink="/igracke">
-            <i class="fa-solid fa-face-smile"></i>
-            Ponuda igračaka</a></li>
-
-        <li><a routerLink="/recenzije">
-            <i class="fa-solid fa-star"></i>
-            Recenzije</a></li>
-        @if(hasAuth()){
-        <li><a routerLink="/profil">
-            <i class="fa-solid fa-circle-user"></i>
-            Moj profil</a></li>
-
-        <li><a routerLink="/logout">
-            <button type="button" class="nav-link" (click)="logoutNow()">
-              <i class="fa-solid fa-right-to-bracket"></i>
-              Logout</button></a></li>
-        } @else {
-        <li><a routerLink="/login">
-            <i class="fa-solid fa-user-plus"></i>
-            Login</a></li>
-
-        }
-
-
-        <li><a routerLink="/korpa">
-            <i class="fa-solid fa-cart-shopping"></i>
-            Korpa</a></li>
+      <ul class="nav-links">
+        <li><a routerLink="/"><i class="fa-solid fa-house-chimney"></i> Početna</a></li>
+        <li><a routerLink="/igracke"><i class="fa-solid fa-face-smile"></i> Ponuda igračaka</a></li>
+        <li><a routerLink="/recenzije"><i class="fa-solid fa-star"></i> Recenzije</a></li>
+        <li><a routerLink="/profil"><i class="fa-solid fa-circle-user"></i> Moj profil</a></li>
+        <li><a routerLink="/korpa"><i class="fa-solid fa-cart-shopping"></i> Korpa</a></li>
       </ul>
+
+      <div class="auth-section">
+        @if(hasAuth()) {
+        <button type="button" class="auth-btn logout" (click)="logoutNow()">
+          <i class="fa-solid fa-right-to-bracket"></i> Logout
+        </button>
+        } @else {
+        <a routerLink="/login" class="auth-btn login">
+          <i class="fa-solid fa-user-plus"></i> Login
+        </a>
+        }
+      </div>
     </nav>
-    <div class="search-bar">
-      <input type="text" placeholder="Pretraži igračke..." [(ngModel)]="pretraga" />
-      <button>
-        <i class="fa fa-search"></i></button>
-    </div>
   </div>
 </header>
+
 <router-outlet></router-outlet>

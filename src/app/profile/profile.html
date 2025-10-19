@@ -5,46 +5,46 @@
       <div class="card mb-3">
         <div class="card-header d-flex justify-content-between align-items-center">
           <h5>User Profile</h5>
-          @if (!editing()) {
-            <button type="button" class="btn btn-sm btn-outline-primary" (click)="onEditClick()">
-              <i class="fa-solid fa-pen"></i> Edit
-            </button>
-          }
         </div>
 
         <div class="card-body">
           <div class="mb-3">
-            <label class="form-label">Ime</label>
+            <label class="form-label">Ime </label>
             <input type="text" class="form-control" formControlName="firstName">
           </div>
           <div class="mb-3">
-            <label class="form-label">Prezime</label>
+            <label class="form-label">Prezime </label>
             <input type="text" class="form-control" formControlName="lastName">
           </div>
           <div class="mb-3">
-            <label class="form-label">Telefon</label>
+            <label class="form-label">Telefon </label>
             <input type="text" class="form-control" formControlName="phone">
           </div>
           <div class="mb-3">
-            <label class="form-label">Omiljena igračka</label>
+            <label class="form-label">Omiljena igračka </label>
             <select class="form-select" formControlName="toyType">
               @for (t of toyTypes(); track $index) {
-                <option [value]="t">{{t}}</option>
+              <option [value]="t">{{t}}</option>
               }
             </select>
           </div>
           <div class="mb-3">
-            <label class="form-label">Email (ne može se menjati)</label>
+            <label class="form-label">Email (ne može se menjati) </label>
             <input type="email" class="form-control" [value]="currentUser()?.email" readonly>
           </div>
+          @if (!editing()) {
+          <button type="button" class="btn btn-sm btn-outline-primary" (click)="onEditClick()">
+            <i class="fa-solid fa-pen"></i> Edit
+          </button>
+          }
         </div>
 
         @if (editing()) {
-          <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-primary">
-              <i class="fa-solid fa-floppy-disk"></i> Sačuvaj promene
-            </button>
-          </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-sm btn-primary">
+            <i class="fa-solid fa-floppy-disk"></i> Sačuvaj promene
+          </button>
+        </div>
         }
       </div>
     </form>
@@ -55,19 +55,19 @@
     <form [formGroup]="passwordForm" (ngSubmit)="onPasswordSubmit()">
       <div class="card mb-3">
         <div class="card-header">
-          <h5>Resetuj lozinku</h5>
+          <h5>Resetuj lozinku </h5>
         </div>
         <div class="card-body">
           <div class="mb-3">
-            <label class="form-label">Trenutna lozinka</label>
+            <label class="form-label">Trenutna lozinka </label>
             <input type="password" class="form-control" formControlName="current">
           </div>
           <div class="mb-3">
-            <label class="form-label">Nova lozinka</label>
+            <label class="form-label">Nova lozinka </label>
             <input type="password" class="form-control" formControlName="new">
           </div>
           <div class="mb-3">
-            <label class="form-label">Potvrdi lozinku</label>
+            <label class="form-label">Potvrdi lozinku </label>
             <input type="password" class="form-control" formControlName="repeat">
           </div>
         </div>

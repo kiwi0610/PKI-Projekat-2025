@@ -12,7 +12,6 @@
                 <th>Količina</th>
                 <th>Cena</th>
                 <th>Moja ocena</th>
-                <th>Prosečna ocena</th>
                 <th>Datum ocenjivanja</th>
             </tr>
         </thead>
@@ -24,7 +23,7 @@
                 <td>{{ item.amount }}</td>
                 <td>{{ getItemPrice(item) | number:'1.2-2' }} RSD</td>
 
-                
+
                 <td>
                     @for (star of [1,2,3,4,5]; track star) {
                     <span (click)="updateRating(item, star)"
@@ -32,11 +31,6 @@
                         ★
                     </span>
                     }
-                </td>
-
-            
-                <td>
-                    {{ getAverageRating(item.toyId) | number:'1.1-1' }} ⭐
                 </td>
 
                 <td>{{ item.updatedAt | date:'dd.MM.yyyy. HH:mm' }}</td>

@@ -32,7 +32,7 @@
 }
 
 .reset-btn {
-    background-color: #ff6b6b;
+    background-color: #386fa4;
     color: white;
     border: none;
     padding: 8px 16px;
@@ -41,10 +41,11 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    justify-content: center;
 }
 
 .reset-btn:hover {
-    background-color: #e55a5a;
+    background-color: #007bff;
 }
 
 .search-bar {
@@ -63,7 +64,7 @@
     font-size: 16px;
 }
 
-.search-container{
+.search-container {
     background-color: #c6dbf0;
 }
 
